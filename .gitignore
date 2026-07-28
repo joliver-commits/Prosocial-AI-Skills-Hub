@@ -1,9 +1,6 @@
 # Build output
 _site/
 
-# Local skill install target (see scripts/install-local.sh)
-.claude/skills/
-
 # Python
 __pycache__/
 *.py[cod]
