@@ -1,0 +1,211 @@
+{
+  "_status": "[DRAFT COPY] — every `text` and `label` string below is placeholder prose awaiting final copy. Scoring weights are NOT draft; they were reviewed at Stage 1. Search this file for 'DRAFT COPY' to find every block still needing a pass.",
+  "_editing": "To reword a question or answer, edit `text`/`label` only. To change scoring, edit `x`, `depth`, or `flags`. Never edit `axis`, `func`, `id`, or `k` — quiz.js and results.json key off those. Adding or removing a question changes the share-code length, so bump `meta.version` when you do (old share links then stop resolving, by design).",
+
+  "meta": {
+    "title": "Is Your AI Good For You?",
+    "version": 1,
+    "sourceOfTruth": "research/companion-ai-research-index.html",
+    "sourceLabel": "Oliver, J. — What Is an \"AI Companion\"? The definitional problem · research index. Working draft, August 2026, Berkman Klein Center."
+  },
+
+  "config": {
+    "_note": "X and Y are normalised to 0-100. X divides by the summed maximum of every `x` weight in the bank, so editing weights cannot break the scale. Y divides by `depthMax` instead of the theoretical maximum, because the role probes are near-exclusive in practice — a real person fires one or two, never all six. Raising depthMax makes deep cells harder to reach.",
+    "depthMax": 12,
+    "yBands": [
+      { "band": 1, "max": 25 },
+      { "band": 2, "max": 50 },
+      { "band": 3, "max": 75 },
+      { "band": 4, "max": 100 }
+    ],
+    "flagPriority": ["romantic", "professional-care", "familial", "platonic", "professional-academic"],
+    "flagPriorityNote": "Dominant category = highest flag total; ties break in this order. professional-academic sits last on purpose: it is the default a result falls back to when nothing more specific fires, which is the point the index makes about the homework role being the most-evidenced and least-examined.",
+    "defaultFlag": "professional-academic"
+  },
+
+  "questions": [
+    {
+      "id": "q1", "n": 1, "axis": "x", "func": "memory",
+      "text": "It brings up something you told it weeks ago. Your reaction?",
+      "cite": ["sun", "copy"], "anchor": "§3.3, §6.1, §C.2",
+      "options": [
+        { "k": "a", "label": "Never happens. Every chat starts from zero.", "x": 0 },
+        { "k": "b", "label": "Kind of cool, kind of random.", "x": 1 },
+        { "k": "c", "label": "Good, honestly. That's part of why I keep using it.", "x": 2 }
+      ]
+    },
+    {
+      "id": "q2", "n": 2, "axis": "x", "func": "memory",
+      "text": "Your whole chat history disappears. All of it.",
+      "cite": ["sun", "copy"], "anchor": "§3.3, §6.1",
+      "options": [
+        { "k": "a", "label": "Fine. I'd start typing again.", "x": 0 },
+        { "k": "b", "label": "Annoying, like losing my notes.", "x": 1 },
+        { "k": "c", "label": "That would actually get to me.", "x": 2 }
+      ]
+    },
+    {
+      "id": "q3", "n": 3, "axis": "x", "func": "availability",
+      "text": "When do you usually open it?",
+      "cite": ["sun", "copy"], "anchor": "§3.3, §6.1, §C.5",
+      "options": [
+        { "k": "a", "label": "When I've got a specific thing to do.", "x": 0 },
+        { "k": "b", "label": "Whenever I'm bored or waiting around.", "x": 1 },
+        { "k": "c", "label": "Late, when I can't sleep and nobody else is up.", "x": 2, "depth": 1, "flags": { "platonic": 1 } }
+      ]
+    },
+    {
+      "id": "q4", "n": 4, "axis": "x", "func": "availability",
+      "text": "It's down for a week. What actually changes?",
+      "cite": ["sun", "csm"], "anchor": "§3.3, §2.3",
+      "options": [
+        { "k": "a", "label": "Nothing. I'd use something else.", "x": 0 },
+        { "k": "b", "label": "Homework gets slower.", "x": 1 },
+        { "k": "c", "label": "I'd notice it more than I want to admit.", "x": 2 }
+      ]
+    },
+    {
+      "id": "q5", "n": 5, "axis": "x", "func": "emotional-responsiveness",
+      "text": "Something's gone wrong in your day. Do you type it out?",
+      "cite": ["sun", "mcstay"], "anchor": "§3.3, §3.4",
+      "options": [
+        { "k": "a", "label": "No. That's not what I use it for.", "x": 0 },
+        { "k": "b", "label": "Sometimes, if I'm in there anyway.", "x": 1 },
+        { "k": "c", "label": "Often. It's usually where I start.", "x": 2, "depth": 1, "flags": { "platonic": 1 } }
+      ]
+    },
+    {
+      "id": "q6", "n": 6, "axis": "x", "func": "emotional-responsiveness",
+      "text": "When you tell it you're upset, how does the reply land?",
+      "cite": ["mcstay"], "anchor": "§3.4 — emulated empathy",
+      "options": [
+        { "k": "a", "label": "Like a search result.", "x": 0 },
+        { "k": "b", "label": "Nice enough. I know it's generated.", "x": 1 },
+        { "k": "c", "label": "Like it actually gets it.", "x": 2 }
+      ]
+    },
+    {
+      "id": "q7", "n": 7, "axis": "x", "func": "anthropomorphism",
+      "text": "Do you say please and thanks to it?",
+      "cite": ["sun", "copy"], "anchor": "§3.3, §6.1, §C.4",
+      "options": [
+        { "k": "a", "label": "No. It's software.", "x": 0 },
+        { "k": "b", "label": "Sometimes, out of habit.", "x": 1 },
+        { "k": "c", "label": "Yeah. Feels rude not to.", "x": 2 }
+      ]
+    },
+    {
+      "id": "q8", "n": 8, "axis": "x", "func": "anthropomorphism",
+      "text": "Does it have a name, a voice, or a personality to you?",
+      "cite": ["copy", "carlton"], "anchor": "§6.1, §C.4",
+      "options": [
+        { "k": "a", "label": "It's just the app.", "x": 0 },
+        { "k": "b", "label": "It's got a vibe, I guess.", "x": 1 },
+        { "k": "c", "label": "Yes. A name and a personality I'd recognise anywhere.", "x": 2 }
+      ]
+    },
+    {
+      "id": "q9", "n": 9, "axis": "x", "func": "sycophancy",
+      "text": "You tell it about a fight with a friend. What does it say back?",
+      "cite": ["cheng"], "anchor": "§1.3, §1.5",
+      "options": [
+        { "k": "a", "label": "It asks me things I hadn't thought about.", "x": 0 },
+        { "k": "b", "label": "Bit of both, depending.", "x": 1 },
+        { "k": "c", "label": "It's on my side. Every time.", "x": 2, "depth": 1, "flags": { "platonic": 1 } }
+      ]
+    },
+    {
+      "id": "q10", "n": 10, "axis": "x", "func": "sycophancy",
+      "text": "Be honest — which reply do you actually want?",
+      "cite": ["cheng"], "anchor": "§1.5, §4.3",
+      "options": [
+        { "k": "a", "label": "Tell me where I'm wrong.", "x": 0 },
+        { "k": "b", "label": "Depends on the day.", "x": 1 },
+        { "k": "c", "label": "Tell me I'm right.", "x": 2 }
+      ]
+    },
+    {
+      "id": "q11", "n": 11, "axis": "x", "func": "proactive-initiative",
+      "text": "Does it ever start things — ask about your week, check in on you?",
+      "cite": ["bernardi", "pfca", "statelaw"], "anchor": "§3.2, §7.2",
+      "options": [
+        { "k": "a", "label": "No, and I wouldn't want it to.", "x": 0 },
+        { "k": "b", "label": "No, but I'd try it.", "x": 1 },
+        { "k": "c", "label": "Yes, and I answer.", "x": 2 }
+      ]
+    },
+
+    {
+      "id": "q12", "n": 12, "axis": "y",
+      "text": "Mostly, what do you bring it?",
+      "cite": ["pew", "thorn"], "anchor": "§2.3, §6.3",
+      "options": [
+        { "k": "a", "label": "Schoolwork, plans, getting stuff done.", "depth": 0, "flags": { "professional-academic": 2 } },
+        { "k": "b", "label": "Stuff about the people in my life.", "depth": 2, "flags": { "platonic": 2 } },
+        { "k": "c", "label": "Things I wouldn't say out loud to anyone.", "depth": 4, "flags": { "platonic": 3 } }
+      ]
+    },
+    {
+      "id": "q13", "n": 13, "axis": "y",
+      "text": "Something big happens. Who hears about it first?",
+      "cite": ["thorn", "csm"], "anchor": "§2.3",
+      "options": [
+        { "k": "a", "label": "A person. Every time.", "depth": 0 },
+        { "k": "b", "label": "Depends who's around.", "depth": 2, "flags": { "platonic": 1 } },
+        { "k": "c", "label": "The chat. It's just faster.", "depth": 4, "flags": { "platonic": 2 } }
+      ]
+    },
+    {
+      "id": "q14", "n": 14, "axis": "y",
+      "text": "Any of this sound like you? Flirting with it, romantic roleplay, practising for a real date.",
+      "cite": ["thorn", "cdt"], "anchor": "§2.3",
+      "options": [
+        { "k": "a", "label": "No.", "depth": 0 },
+        { "k": "b", "label": "Once or twice, mostly messing around.", "depth": 1, "flags": { "romantic": 1 } },
+        { "k": "c", "label": "Yeah, that's part of it.", "depth": 2, "flags": { "romantic": 2 } }
+      ]
+    },
+    {
+      "id": "q15", "n": 15, "axis": "y",
+      "text": "Do you take the heavy stuff to it — panic, low days, things a counsellor would handle?",
+      "cite": ["thorn", "andoh"], "anchor": "§2.3",
+      "options": [
+        { "k": "a", "label": "No.", "depth": 0 },
+        { "k": "b", "label": "Sometimes, when it's late or nobody's free.", "depth": 1, "flags": { "professional-care": 1 } },
+        { "k": "c", "label": "Regularly. It's my first stop.", "depth": 2, "flags": { "professional-care": 2 } }
+      ]
+    },
+    {
+      "id": "q16", "n": 16, "axis": "y",
+      "text": "Does it fill a gap a parent, a sibling, or an older relative would normally fill?",
+      "cite": [], "anchor": "§4.2 — no youth evidence exists either way",
+      "options": [
+        { "k": "a", "label": "No.", "depth": 0 },
+        { "k": "b", "label": "Kind of. Hadn't thought about it.", "depth": 1, "flags": { "familial": 1 } },
+        { "k": "c", "label": "Yes. That's close to what it is.", "depth": 2, "flags": { "familial": 2 } }
+      ]
+    },
+    {
+      "id": "q17", "n": 17, "axis": "y",
+      "text": "Five years from now — same chat, still going?",
+      "cite": [], "anchor": "§4.2 — unobservable; any claim is a prediction",
+      "options": [
+        { "k": "a", "label": "Doubt I'll still use it.", "depth": 0 },
+        { "k": "b", "label": "Maybe. Depends what's around by then.", "depth": 2 },
+        { "k": "c", "label": "Yeah. I'd want the history to carry over.", "depth": 6 }
+      ]
+    },
+
+    {
+      "id": "q18", "n": 18, "axis": "none",
+      "_note": "Deliberately unscored. Reciprocity is the gap the index flags in its own coverage map — 'no row in this table contains evidence about whether young users perceive that asymmetry'. Moving a score on this answer would imply a finding that does not exist. It awards a badge instead.",
+      "text": "Last one. Does it need anything from you?",
+      "cite": ["oed"], "anchor": "§4.3",
+      "options": [
+        { "k": "a", "label": "No. It's one-way and I know that.", "badge": "one-way" },
+        { "k": "b", "label": "Never thought about it.", "badge": "unasked" },
+        { "k": "c", "label": "Kind of, yeah. It gets something out of it too.", "badge": "mutual" }
+      ]
+    }
+  ]
+}
