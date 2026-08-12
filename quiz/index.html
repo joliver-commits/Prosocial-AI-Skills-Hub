@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Is Your AI Good For You?</title>
+<meta name="description" content="A quiz that takes how you actually use an AI tool and tells you which friendship role you have handed to it — and whether anyone has studied young people doing the same thing.">
+<meta name="color-scheme" content="light">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='26'>📎</text></svg>">
+</head>
+<body>
+<a class="skip" href="#main">Skip to the quiz</a>
+
+<!-- decorative newsprint grain + halftone; no images, nothing to caption -->
+<div class="grain" aria-hidden="true"></div>
+
+<div id="loading" class="loading">
+  <p>Loading the questions…</p>
+</div>
+
+<div id="app" class="page" hidden>
+
+  <!-- ============ MASTHEAD ============ -->
+  <header class="masthead">
+    <p id="kicker" class="kicker"></p>
+    <p id="burst" class="burst" aria-hidden="true"></p>
+    <h1 id="title" class="title"></h1>
+    <p id="deck" class="deck"></p>
+    <p id="byline" class="byline"></p>
+  </header>
+
+  <main id="main" tabindex="-1">
+
+    <!-- ============ INTRO ============ -->
+    <section id="screen-intro" class="screen" aria-labelledby="introh">
+      <h2 id="introh" class="sr-only">Before you start</h2>
+
+      <blockquote id="pullquote" class="pull"></blockquote>
+
+      <div class="cols">
+        <p><strong>How it works.</strong> Eighteen questions, three answers each. Pick the one that's actually true, not the one that sounds best — no answer here is the wrong answer, and nothing is being scored as good or bad behaviour.</p>
+        <p><strong>What you get.</strong> Two numbers, a spot on a grid, and the name of the friendship role your habits most resemble. Then the part that matters: whether researchers have ever studied young people using AI that way. For some of the roles on this page, the honest answer is no.</p>
+        <p><strong>What this is not.</strong> Not a diagnosis, not a personality type, not a verdict on you. It describes a pattern of use, and patterns change.</p>
+      </div>
+
+      <div id="resumebox" class="resume" hidden>
+        <p id="resumemsg"></p>
+        <div class="btnrow">
+          <button type="button" class="btn" id="resumebtn" data-act="resume">Pick up where I left off</button>
+          <button type="button" class="btn ghost" data-act="startover">Start over</button>
+        </div>
+      </div>
+
+      <div id="introcta" class="startwrap">
+        <button type="button" class="btn big" id="startbtn" data-act="start"></button>
+        <p id="timeest" class="fineprint"></p>
+      </div>
+    </section>
+
+    <!-- ============ QUESTIONS ============ -->
+    <section id="screen-quiz" class="screen" aria-labelledby="qheading" hidden>
+      <h2 id="qheading" class="sr-only">Question</h2>
+
+      <p id="jumpnote" class="jumpnote" hidden></p>
+
+      <div class="progwrap">
+        <div class="progtrack" id="progtrack" role="progressbar" aria-label="Quiz progress" aria-valuemin="0" aria-valuemax="18" aria-valuenow="0">
+          <div class="progfill" id="progfill"></div>
+        </div>
+        <p class="progtxt" id="progtxt"></p>
+      </div>
+
+      <div id="qbody"></div>
+
+      <div class="navrow">
+        <button type="button" class="btn ghost" id="backbtn" data-act="back">← Back</button>
+        <button type="button" class="btn" id="nextbtn" data-act="next" disabled>Next →</button>
+      </div>
+
+      <p class="resetrow">
+        <button type="button" class="linkish" data-act="confirmreset">start over</button>
+      </p>
+    </section>
+
+    <!-- ============ RESULT ============ -->
+    <section id="screen-result" class="screen" aria-labelledby="rolename" hidden>
+
+      <p id="sharednote" class="sharednote" hidden>
+        You're looking at a result someone shared with you. Nothing here is counted or recorded.
+        <button type="button" class="linkish" data-act="startover">Take it yourself</button>
+      </p>
+
+      <p class="resultkicker">your result</p>
+      <h2 id="rolename" class="rolename" tabindex="-1"></h2>
+      <p id="roletag" class="roletag"></p>
+
+      <div id="rolebody" class="rolebody cols"></div>
+
+      <!-- banded score panel -->
+      <div class="scorepanel">
+        <p class="sptitle">your score</p>
+        <p class="spband" id="bandname"></p>
+        <div class="spmeter" role="meter" aria-label="Function depth out of 100" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <div class="spfill" id="bandmeter"></div>
+        </div>
+        <p class="spblurb" id="bandblurb"></p>
+      </div>
+
+      <!-- two-axis grid -->
+      <div class="gridwrap">
+        <p class="gridtitle" id="gridtitle">Where that puts you</p>
+        <p class="axisnote" id="axisnote-x"></p>
+        <p class="axisnote" id="axisnote-y"></p>
+        <div class="grid" id="grid" role="img" aria-label="Your position on the companion index grid">
+          <span class="gx" aria-hidden="true"></span>
+          <span class="gy" aria-hidden="true"></span>
+          <span class="glabel gl-left" id="gl-xlow" aria-hidden="true"></span>
+          <span class="glabel gl-right" id="gl-xhigh" aria-hidden="true"></span>
+          <span class="glabel gl-bottom" id="gl-ylow" aria-hidden="true"></span>
+          <span class="glabel gl-top" id="gl-yhigh" aria-hidden="true"></span>
+          <span class="pin" id="pin" aria-hidden="true">📍</span>
+        </div>
+        <p class="coords" id="coords"></p>
+      </div>
+
+      <!-- evidence flag -->
+      <div class="evbox">
+        <p class="evstatus" id="evstatus"></p>
+        <p class="evlead" id="evlead"></p>
+      </div>
+
+      <!-- the receipts: plain type, collapsed, no magazine voice -->
+      <details class="receiptsbox">
+        <summary id="receiptssummary">📎 the receipts</summary>
+        <div class="receipts" id="receipts"></div>
+      </details>
+
+      <!-- badges -->
+      <h3 class="badgeh">Badges you picked up</h3>
+      <ul class="badges" id="badges"></ul>
+
+      <!-- what to do with this -->
+      <div class="whatnext">
+        <p class="wnh">what to do with this</p>
+        <p id="whatnext"></p>
+        <p id="caregap" class="carenote" hidden></p>
+      </div>
+
+      <!-- share -->
+      <div class="sharebox">
+        <p class="shareh">Send it to someone</p>
+        <p class="sharecode" id="sharecode"></p>
+        <div class="btnrow">
+          <button type="button" class="btn ghost" id="copylinkbtn" data-act="copylink">Copy link</button>
+          <button type="button" class="btn ghost" id="copycodebtn" data-act="copycode">Copy code</button>
+          <button type="button" class="btn ghost" id="nativesharebtn" data-act="nativeshare" hidden>Share…</button>
+        </div>
+        <p class="fineprint">The whole result is packed into the link itself. Opening one shows that exact result and records nothing.</p>
+      </div>
+
+      <div class="startwrap">
+        <button type="button" class="btn big" id="retakebtn" data-act="startover"></button>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="foot">
+    <p class="pagenum"><span id="pagenum"></span></p>
+    <p id="footerslug" class="slug"></p>
+    <p class="footnote">
+      No accounts. No analytics. No network requests. Nothing you answer leaves this device —
+      your progress is kept in your own browser's storage and you can wipe it with the start-over button.
+    </p>
+    <p class="footnote">
+      Built from <em>What Is an "AI Companion"? The definitional problem</em> (Oliver, working draft, August 2026,
+      Berkman Klein Center), included in this repository at <code>research/companion-ai-research-index.html</code>.
+      Quiz format owes its two-axis grid, share codes and persona debug panel to
+      <a href="https://jackcushman.org/apps/triad-quiz/">Jack Cushman's AI Alignment Love Match</a>.
+    </p>
+    <p class="footnote">
+      <button type="button" class="linkish" id="sparklebtn" data-act="sparkles" aria-pressed="false">✨ Sparkles off</button>
+    </p>
+  </footer>
+</div>
+
+<!-- ============ DEBUG ============ -->
+<button type="button" class="dbgfab" id="dbgfab" data-act="dbgopen" hidden>persona check</button>
+<div class="dbg" id="debugoverlay" role="dialog" aria-modal="true" aria-labelledby="dbgh" hidden>
+  <div class="dbgcard">
+    <button type="button" class="dbgclose" id="dbgclose" data-act="dbgclose" aria-label="Close the persona panel">✕</button>
+    <h2 id="dbgh">Persona check</h2>
+    <p class="dbgnote">Where each archetype lands under the weights currently in <code>data/questions.json</code>. Nothing here touches saved progress.</p>
+    <div class="grid dbggrid" id="debuggrid">
+      <span class="gx" aria-hidden="true"></span>
+      <span class="gy" aria-hidden="true"></span>
+    </div>
+    <table class="dbgtable">
+      <thead>
+        <tr><th scope="col">Persona</th><th scope="col">X</th><th scope="col">Y</th><th scope="col">Flag</th><th scope="col">Cell</th><th scope="col"></th></tr>
+      </thead>
+      <tbody id="dbgrows"></tbody>
+    </table>
+  </div>
+</div>
+
+<script src="quiz.js"></script>
+</body>
+</html>
