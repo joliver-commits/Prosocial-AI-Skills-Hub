@@ -2,7 +2,7 @@
 
 A collection of AI agent skills for non-anthropomorphic companionship, designed to guide young people toward human connection rather than substitute for it.
 
-Built at the Berkman Klein Center's AI and Human Experience initiative. Architecture adapted from the Harvard Law School Library Innovation Lab's Law Skills Hub. Behavioral principles adapted from The Rithm Project's 5 Principles for Prosocial AI.
+Built by BKC and AIHE Intern during Summer Internship. Architecture adapted from the Harvard Law School Library Innovation Lab's Law Skills Hub. Behavioral principles adapted from The Rithm Project's 5 Principles for Prosocial AI.
 
 **Status: early draft.** This repository is a research artifact and a design hypothesis, not a finished product. See [What remains uncertain](#what-remains-uncertain).
 
