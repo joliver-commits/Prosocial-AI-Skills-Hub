@@ -1,18 +1,65 @@
 {
-  "_status": "[DRAFT COPY] — every `name`, `tag`, `body`, `whatToDo`, `label` and `sub` string is placeholder prose awaiting final copy. The `evidence`, `receipts`, `gap` and `sources` blocks are NOT draft: they are transcribed from the research index and must not be reworded without checking it. Search this file for 'DRAFT COPY' to find every block still needing a pass.",
-  "_editing": "Result cards live in `roles`. The grid lookup lives in `cells`. Badge rules live in `badges`. Nothing here is referenced by name in quiz.js except the top-level keys, so you can rewrite any copy freely.",
-
+  "_status": "[DRAFT COPY] — every `name`, `tag`, `body`, `whatToDo`, `label` and `sub` string is placeholder prose awaiting final copy. The `definition`, `evidence`, `receipts`, `gap` and `sources` blocks are NOT draft: they are transcribed from the underlying studies and definitions and must not be reworded without checking them. Search this file for 'DRAFT COPY' to find every block still needing a pass.",
+  "_editing": "Result cards live in `roles`. The grid lookup lives in `cells`. Badge rules live in `badges`. The four-function definition lives in `definition`. Nothing here is referenced by name in quiz.js except the top-level keys, so you can rewrite any copy freely.",
+  "definition": {
+    "_note": "The definition the quiz is built on. Quoted as written — do not paraphrase. The X axis scores how much of this a person's habits engage.",
+    "statement": "Companion AI refers to any AI tool that demonstrates the following four functions: persistent memory, emulated empathy, anthropomorphism, and constant availability.",
+    "functions": [
+      {
+        "key": "memory",
+        "name": "Persistent memory",
+        "text": "The capacity to retain information disclosed in prior interactions (facts, preferences, emotional history) and to draw on it so that the relationship appears to accumulate over time."
+      },
+      {
+        "key": "emulated-empathy",
+        "name": "Emulated empathy",
+        "text": "From Andrew McStay: the function of appearing to possess strong human empathy while having only weak empathy, sensing and responding to emotional states without felt experience."
+      },
+      {
+        "key": "anthropomorphism",
+        "name": "Anthropomorphism",
+        "text": "The function of presenting as human or human-like; through first-person address, a name or persona, a human-like voice, and expressed emotions, such that the user relates to the system as someone rather than something."
+      },
+      {
+        "key": "availability",
+        "name": "Constant availability",
+        "text": "The property of being reachable at any time, without limit on duration or frequency, and without the reciprocal claims that human relationships impose."
+      }
+    ],
+    "beyondDefinition": "Sycophancy and proactive relational initiative are scored on the same axis but are not part of the definition. They are flagged `inDefinition: false` below and labelled as additional design functions wherever they appear."
+  },
   "pageFurniture": {
     "_status": "[DRAFT COPY]",
     "kicker": "quiz",
     "titleWords": [
-      { "t": "Is", "style": "thin" },
-      { "t": "Your", "style": "thin" },
-      { "t": "AI", "style": "fat-lime" },
-      { "t": "Good", "style": "script-pink" },
-      { "t": "For", "style": "thin" },
-      { "t": "You", "style": "fat-black" },
-      { "t": "?", "style": "big-cyan" }
+      {
+        "t": "Is",
+        "style": "thin"
+      },
+      {
+        "t": "Your",
+        "style": "thin"
+      },
+      {
+        "t": "AI",
+        "style": "fat-lime"
+      },
+      {
+        "t": "Good",
+        "style": "script-pink"
+      },
+      {
+        "t": "For",
+        "style": "thin"
+      },
+      {
+        "t": "You",
+        "style": "fat-black"
+      },
+      {
+        "t": "?",
+        "style": "big-cyan"
+      }
     ],
     "deck": "Answer honestly about how you actually use it. At the end you'll find out which friendship role you've handed to a chatbot — and whether anybody has bothered to study young people doing the same thing.",
     "byline": "BY THE COMPANION INDEX",
@@ -31,366 +78,849 @@
       "xHigh": "the full feature set ▶",
       "yLow": "thin role ▼",
       "yHigh": "▲ close role",
-      "xAxis": "Function depth — how much of the companion feature set your habits switch on",
+      "xAxis": "Function depth — how much of the companion function set your habits switch on",
       "yAxis": "Role depth — how close a friendship role your use occupies"
+    },
+    "companionnessScale": {
+      "_status": "[DRAFT COPY] — caption and anchor labels",
+      "_note": "Companionness is a property of the resolved role, not a separate measurement. Each role carries its own value under roles.<key>.companionness. Anchors below are the fixed reference points printed under the meter.",
+      "label": "companionness",
+      "caption": "How companion-like this pattern of use is. It's a position on a scale, not a score out of anything — nothing here is being marked.",
+      "anchors": [
+        {
+          "v": 0,
+          "t": "doesn't use AI"
+        },
+        {
+          "v": 25,
+          "t": "assistant"
+        },
+        {
+          "v": 75,
+          "t": "confidant"
+        },
+        {
+          "v": 100,
+          "t": "partner or best friend"
+        }
+      ]
+    },
+    "definitionPanel": {
+      "_status": "[DRAFT COPY] — heading and lead only; the four function texts under `definition` are not draft",
+      "summary": "📐 what counts as companion AI",
+      "lead": "Companion AI is defined here by four functions. This is how many of them your own habits switch on — a tool can have all four built in, and you can still only use one of them.",
+      "metTemplate": "Your use engages {n} of the 4."
     }
   },
-
   "xBands": [
     {
-      "band": 1, "max": 33,
+      "band": 1,
+      "max": 33,
       "_status": "[DRAFT COPY]",
       "name": "TOOL MODE",
       "emoji": "🔧",
       "blurb": "You use it and put it down. Almost none of the features built to make a chatbot feel like company are switched on in how you use it."
     },
     {
-      "band": 2, "max": 66,
+      "band": 2,
+      "max": 66,
       "_status": "[DRAFT COPY]",
       "name": "SOMEWHERE IN BETWEEN",
       "emoji": "🌗",
       "blurb": "Some of the company-shaped features are doing work for you and some aren't. This is where most people land."
     },
     {
-      "band": 3, "max": 100,
+      "band": 3,
+      "max": 100,
       "_status": "[DRAFT COPY]",
       "name": "THE WHOLE KIT",
       "emoji": "✨",
       "blurb": "Nearly all of it is switched on for you: it remembers, it's always there, it reacts to how you feel, and it mostly agrees with you."
     }
   ],
-
   "functions": {
-    "_note": "The four features are the index's definitional core (§3.3, Sun et al., peer-reviewed). Sycophancy comes from the risk list in §1.3 and the experimental work cited in §1.5. Proactive initiative comes from Bernardi's definition (§3.2) and New York's Article 47 test (§7.2). They are listed together here because the quiz scores them together, not because the index treats them as one taxonomy.",
-    "memory": { "label": "Persistent memory", "core": true, "cite": ["sun"], "max": 4, "high": 3, "low": 1 },
-    "availability": { "label": "Constant availability", "core": true, "cite": ["sun"], "max": 4, "high": 3, "low": 1 },
-    "emotional-responsiveness": { "label": "Emotional responsiveness", "core": true, "cite": ["sun", "mcstay"], "max": 4, "high": 3, "low": 1 },
-    "anthropomorphism": { "label": "Anthropomorphism", "core": true, "cite": ["sun"], "max": 4, "high": 3, "low": 1 },
-    "sycophancy": { "label": "Sycophancy", "core": false, "cite": ["cheng"], "max": 4, "high": 3, "low": 1 },
-    "proactive-initiative": { "label": "Proactive relational initiative", "core": false, "cite": ["bernardi"], "max": 2, "high": 2, "low": 0 }
-  },
-
-  "cells": {
-    "_note": "Result cell = dominant category flag × Y band. Every cell resolves to one row of the index's roles-vs-evidence coverage map, so the evidence status is a property of the role and never of the person answering. The lifelong cell is gated on q17 because Gupta's fourth grade is defined by years of shared memory — depth alone must not be able to reach it.",
-    "platonic": {
-      "1": { "role": "acquaintance" },
-      "2": { "role": "casual-friend" },
-      "3": { "role": "confidant" },
-      "4": { "role": "lifelong-friend", "gate": { "qid": "q17", "option": "c" }, "fallback": "confidant" }
+    "_note": "The first four are the definition. Sycophancy and proactive relational initiative are additional design functions the quiz also scores; they carry inDefinition:false and are never presented as part of the definition. `engagedAt` is the score at which a function counts as switched on by someone's habits: 3 of a possible 4, so it takes a clear yes on one question plus a partial on the other. Half (2) was too generous — it let a person who answered in the middle of every question read as engaging three of the four.",
+    "memory": {
+      "label": "Persistent memory",
+      "cite": [],
+      "max": 4,
+      "high": 3,
+      "low": 1,
+      "inDefinition": true,
+      "engagedAt": 3
     },
-    "professional-academic": { "*": { "role": "mentor-tutor" } },
-    "professional-care": { "*": { "role": "therapist-like" } },
-    "romantic": { "*": { "role": "romantic-partner" } },
-    "familial": { "*": { "role": "familial" } }
+    "emulated-empathy": {
+      "label": "Emulated empathy",
+      "cite": [
+        "mcstay"
+      ],
+      "max": 4,
+      "high": 3,
+      "low": 1,
+      "inDefinition": true,
+      "engagedAt": 3
+    },
+    "anthropomorphism": {
+      "label": "Anthropomorphism",
+      "cite": [],
+      "max": 4,
+      "high": 3,
+      "low": 1,
+      "inDefinition": true,
+      "engagedAt": 3
+    },
+    "availability": {
+      "label": "Constant availability",
+      "cite": [],
+      "max": 4,
+      "high": 3,
+      "low": 1,
+      "inDefinition": true,
+      "engagedAt": 3
+    },
+    "sycophancy": {
+      "label": "Sycophancy",
+      "cite": [
+        "cheng"
+      ],
+      "max": 4,
+      "high": 3,
+      "low": 1,
+      "inDefinition": false,
+      "engagedAt": null
+    },
+    "proactive-initiative": {
+      "label": "Proactive relational initiative",
+      "cite": [
+        "bernardi"
+      ],
+      "max": 2,
+      "high": 2,
+      "low": 0,
+      "inDefinition": false,
+      "engagedAt": null
+    }
   },
-
+  "cells": {
+    "_note": "Result cell = dominant category flag × Y band. Every cell resolves to one named companionship role, so the evidence status and the companionness reading are properties of the role and never of the person answering. The lifelong cell is gated on q17 because Gupta's fourth grade is defined by years of shared memory — depth alone must not be able to reach it.",
+    "platonic": {
+      "1": {
+        "role": "acquaintance"
+      },
+      "2": {
+        "role": "casual-friend"
+      },
+      "3": {
+        "role": "confidant"
+      },
+      "4": {
+        "role": "lifelong-friend",
+        "gate": {
+          "qid": "q17",
+          "option": "c"
+        },
+        "fallback": "confidant"
+      }
+    },
+    "professional-academic": {
+      "*": {
+        "role": "mentor-tutor"
+      }
+    },
+    "professional-care": {
+      "*": {
+        "role": "therapist-like"
+      }
+    },
+    "romantic": {
+      "*": {
+        "role": "romantic-partner"
+      }
+    },
+    "familial": {
+      "*": {
+        "role": "familial"
+      }
+    }
+  },
   "evidenceLabels": {
-    "documented": { "label": "Documented", "emoji": "📗", "lead": "Other young people are doing this, and somebody measured it." },
-    "thin": { "label": "Thin", "emoji": "📙", "lead": "Some evidence exists, with a catch." },
-    "unstudied": { "label": "Unstudied", "emoji": "📕", "lead": "Nobody has actually studied young people using AI this way yet. Which means you know something the researchers don't." }
+    "documented": {
+      "label": "Documented",
+      "emoji": "📗",
+      "lead": "Other young people are doing this, and somebody measured it."
+    },
+    "thin": {
+      "label": "Thin",
+      "emoji": "📙",
+      "lead": "Some evidence exists, with a catch."
+    },
+    "unstudied": {
+      "label": "Unstudied",
+      "emoji": "📕",
+      "lead": "Nobody has actually studied young people using AI this way yet. Which means you know something the researchers don't."
+    }
   },
-
   "roles": {
     "mentor-tutor": {
       "_status": "[DRAFT COPY] — name, tag, body, whatToDo",
       "name": "THE HOMEWORK FRIEND",
       "emoji": "📚",
-      "indexRole": "Mentor, tutor, study partner",
+      "roleName": "Mentor, tutor, study partner",
       "category": "Professional",
       "tag": "the most common role, and the least examined",
       "evidence": "documented",
-      "body": "You mostly bring it work. Essays, revision, plans, the thing due tomorrow. That sounds like the boring result and it isn't: helping with schoolwork is the single biggest thing young people use these tools for, which makes this the best-documented role on the whole map. It's also the one almost nobody studies as a *relationship*. Researchers count it as a cheating problem, not a friendship one. The reason that matters: the index calls this \"the role through which most young people first form a habit of confiding.\" Tutor is where the door opens.",
+      "companionness": 25,
+      "body": "You mostly bring it work. Essays, revision, plans, the thing due tomorrow. That sounds like the boring result and it isn't: helping with schoolwork is the single biggest thing young people use these tools for, which makes this the best-documented role on the whole map. It's also the one almost nobody studies as a *relationship*. Researchers count it as a cheating problem, not a friendship one. And that matters, because tutor is the role through which most young people first form a habit of confiding. It's where the door opens.",
       "whatToDo": "Next time it explains something well, explain it back to an actual person — someone in your class, a sibling, anyone. Saying it out loud to a human is the part that makes it stick.",
       "receipts": [
-        { "source": "pew", "finding": "54% of teens use chatbots for schoolwork — the single largest use recorded. 57% use them for information-seeking.", "context": "Pew also notes that majorities of teens report NOT using chatbots for casual conversation or emotional support." },
-        { "source": "thorn", "finding": "The tools doing this work are general assistants, not companion apps: ChatGPT reaches 78% of AI-using minors, Character AI 15%, Replika 2%.", "context": "Multiple-select question, so these cannot be summed. Fig 5B, p. 14." }
+        {
+          "source": "pew",
+          "finding": "54% of teens use chatbots for schoolwork — the single largest use recorded. 57% use them for information-seeking.",
+          "context": "Pew also notes that majorities of teens report NOT using chatbots for casual conversation or emotional support."
+        },
+        {
+          "source": "thorn",
+          "finding": "The tools doing this work are general assistants, not companion apps: ChatGPT reaches 78% of AI-using minors, Character AI 15%, Replika 2%.",
+          "context": "Multiple-select question, so these cannot be summed. Fig 5B, p. 14."
+        }
       ],
       "gap": "Treated as benign and therefore almost never studied as a relational role, even though it is the role through which most young people first form a habit of confiding."
     },
-
     "confidant": {
       "_status": "[DRAFT COPY] — name, tag, body, whatToDo",
       "name": "THE ONE YOU TELL FIRST",
       "emoji": "🔒",
-      "indexRole": "Confidant, close friend",
+      "roleName": "Confidant, close friend",
       "category": "Platonic",
       "tag": "close-friend territory",
       "evidence": "documented",
+      "companionness": 75,
       "body": "When something happens, this is where it goes first. Not the group chat, not a person — here. In the taxonomy this quiz uses, that's the third grade of friendship: the one built on emotional intimacy and trust. There's real evidence other people your age are doing exactly this, so you are not unusual. The honest catch is in the research itself: nobody has managed to separate teenagers confiding in a chatbot built to be a companion from teenagers confiding in a homework assistant. Same behaviour, and the studies can't tell the two apart yet.",
       "whatToDo": "There's probably one person who'd want to hear the thing you've only typed into a chat. Try them with a small piece of it and see how it goes.",
       "receipts": [
-        { "source": "thorn", "finding": "31% of minors who had used one of these tools had asked it for help or support about something scary or confusing that happened to them.", "context": "Fig 5C, p. 15." },
-        { "source": "csm", "finding": "33% of teens used AI companions for social interaction and relationships — a category defined as \"conversation practice, emotional support, role-playing, friendship, or romantic interactions.\" 31% found the conversations as satisfying or more satisfying than those with real-life friends.", "context": "Countervailing findings from the same survey: 80% reported spending more time with real friends than with AI companions, against 6% reporting the opposite, and two in five had applied a skill practised with AI in real life." }
+        {
+          "source": "thorn",
+          "finding": "31% of minors who had used one of these tools had asked it for help or support about something scary or confusing that happened to them.",
+          "context": "Fig 5C, p. 15."
+        },
+        {
+          "source": "csm",
+          "finding": "33% of teens used AI companions for social interaction and relationships — a category defined as \"conversation practice, emotional support, role-playing, friendship, or romantic interactions.\" 31% found the conversations as satisfying or more satisfying than those with real-life friends.",
+          "context": "Countervailing findings from the same survey: 80% reported spending more time with real friends than with AI companions, against 6% reporting the opposite, and two in five had applied a skill practised with AI in real life."
+        }
       ],
       "gap": "No instrument separates confiding in a labelled companion from confiding in an assistant, so the paper's central comparison cannot yet be made quantitatively."
     },
-
     "romantic-partner": {
       "_status": "[DRAFT COPY] — name, tag, body, whatToDo",
       "name": "THE FLIRT FILE",
       "emoji": "💌",
-      "indexRole": "Romantic or sexual partner",
+      "roleName": "Romantic or sexual partner",
       "category": "Romantic",
       "tag": "the one the lawmakers actually noticed",
       "evidence": "documented",
+      "companionness": 100,
       "body": "Some of what you do here is romantic — flirting, roleplay, working out what you'd say to someone real. This is the role that gets nearly all of the attention: almost every law written about AI companions is aimed at this and pretty much nothing else. Two things worth knowing. It's more common than people admit, and there is survey evidence for it. And it's mid-table on the evidence map, not the top — three other roles have as much or more evidence behind them and attract no rules at all. Practising conversations is a real thing that does transfer. It just doesn't finish the job.",
       "whatToDo": "Rehearsal counts, but it only counts once — the transfer happens when you use it on a person. Try the low-stakes version out loud with someone: a conversation, not a confession.",
       "receipts": [
-        { "source": "thorn", "finding": "31% of minors who had used one of these tools had talked to it or sought advice about romantic feelings or relationships. 11% had flirty, romantic, or sexual conversations.", "context": "Fig 5C, p. 15." },
-        { "source": "cdt", "finding": "Nearly 1 in 5 students have had, or have friends who have had, romantic relationships with AI.", "context": "The research index records this finding but not its venue, method, or sample size, so this receipt is thinner than the others on this card." }
+        {
+          "source": "thorn",
+          "finding": "31% of minors who had used one of these tools had talked to it or sought advice about romantic feelings or relationships. 11% had flirty, romantic, or sexual conversations.",
+          "context": "Fig 5C, p. 15."
+        },
+        {
+          "source": "cdt",
+          "finding": "Nearly 1 in 5 students have had, or have friends who have had, romantic relationships with AI.",
+          "context": "The finding is on record but its venue, method and sample size are not, so this receipt is thinner than the others on this card."
+        }
       ],
       "gap": "The only role companion-specific regulation reliably targets, and the one where the assistant/companion split in the underlying data is least visible."
     },
-
     "therapist-like": {
       "_status": "[DRAFT COPY] — name, tag, body, whatToDo. Care-sensitive cell: copy must stay warm, must mention a trusted person, must not read as an alarm and must not list crisis hotlines.",
       "name": "THE 3 A.M. LISTENER",
       "emoji": "🌙",
-      "indexRole": "Therapist-like support",
+      "roleName": "Therapist-like support",
       "category": "Professional",
       "tag": "the heavy stuff goes here",
       "evidence": "documented",
+      "companionness": 70,
       "careSensitive": true,
       "body": "The hard days go into the chat. Panic, low patches, the stuff you'd technically take to a counsellor if getting one were easy. A lot of people your age do this and there's solid evidence for it, so nothing about this result is a verdict on you. What's worth knowing is the mismatch: the rules that require a chatbot to react properly when someone is struggling were written for apps that call themselves companions. The general-purpose assistants — the ones actually doing most of this work — mostly aren't covered. So the tool getting your worst nights is often the one with the fewest requirements attached to it.",
       "whatToDo": "Late nights are the hardest time to think straight, and a chat window is always the easiest door to open. Pick one person you trust — a friend, a relative, a school counsellor — and tell them a smaller version of it in daylight.",
       "receipts": [
-        { "source": "thorn", "finding": "29% of minors who had used one of these tools sought help or support about something scary or confusing that happened to someone else. Separately, 15% of minors who had experienced online sexual harm sought advice from an AI chatbot or companion afterwards — more than twice the rate at which they turned to some other sources.", "context": "Fig 5C, p. 15, plus Thorn's disclosure chapter." },
-        { "source": "andoh", "finding": "48.7% of adults with a mental health condition use large language models for mental health support.", "context": "This figure is about adults, not teenagers, and comes from a trade magazine summarising other studies rather than from a primary study." }
+        {
+          "source": "thorn",
+          "finding": "29% of minors who had used one of these tools sought help or support about something scary or confusing that happened to someone else. Separately, 15% of minors who had experienced online sexual harm sought advice from an AI chatbot or companion afterwards — more than twice the rate at which they turned to some other sources.",
+          "context": "Fig 5C, p. 15, plus Thorn's disclosure chapter."
+        },
+        {
+          "source": "andoh",
+          "finding": "48.7% of adults with a mental health condition use large language models for mental health support.",
+          "context": "This figure is about adults, not teenagers, and comes from a trade magazine summarising other studies rather than from a primary study."
+        }
       ],
       "gap": "Crisis-response requirements exist in California S.B. 243 but apply to the companion category, not to the assistants doing most of this work."
     },
-
     "casual-friend": {
       "_status": "[DRAFT COPY] — name, tag, body, whatToDo",
       "name": "THE HANGOUT HABIT",
       "emoji": "🎧",
-      "indexRole": "Casual friend",
+      "roleName": "Casual friend",
       "category": "Platonic",
       "tag": "the most common relational use, barely researched",
       "evidence": "thin",
+      "companionness": 45,
       "body": "Nothing heavy. You open it when you're bored, you talk about whatever, you close it. In friendship terms that's the second grade: built on shared interests or just passing time, and usually there for a specific purpose. Here's the odd part. This is probably the most common way young people relate to these tools, and it's the least researched of the lot — because it doesn't produce a dramatic story, so nobody funds a study on it. The evidence that exists is real but thin, and it mostly arrives secondhand.",
       "whatToDo": "Pick one thing you'd normally type into the chat this week and text it to a friend instead. Small boring stuff counts — that's most of what a friendship is actually made of.",
       "receipts": [
-        { "source": "pew", "finding": "16% of teens have used chatbots to have casual conversations.", "context": "Pew notes majorities of teens report not doing this; information-seeking (57%) and schoolwork (54%) remain the dominant uses." },
-        { "source": "csm", "finding": "30% of teens cite entertainment and curiosity as a reason for using AI companions. 9% say it is easier to talk to AI than to people.", "context": "The research index did not have the Common Sense Media report itself — these figures reach it via Teen Vogue's reporting, which is a reliable route to the numbers and an unreliable one to the definitions." }
+        {
+          "source": "pew",
+          "finding": "16% of teens have used chatbots to have casual conversations.",
+          "context": "Pew notes majorities of teens report not doing this; information-seeking (57%) and schoolwork (54%) remain the dominant uses."
+        },
+        {
+          "source": "csm",
+          "finding": "30% of teens cite entertainment and curiosity as a reason for using AI companions. 9% say it is easier to talk to AI than to people.",
+          "context": "These figures come via Teen Vogue's reporting of the Common Sense Media survey rather than the report itself — a reliable route to the numbers and an unreliable one to the definitions."
+        }
       ],
       "gap": "The most common relational use and the least theorised, because it produces no dramatic harm and so attracts no research funding."
     },
-
     "acquaintance": {
       "_status": "[DRAFT COPY] — name, tag, body, whatToDo",
       "name": "THE BACKGROUND BUDDY",
       "emoji": "👋",
-      "indexRole": "Acquaintance",
+      "roleName": "Acquaintance",
       "category": "Platonic",
       "tag": "structurally obvious, completely unmeasured",
       "evidence": "unstudied",
+      "companionness": 15,
       "body": "It's around, you use it, it isn't a big deal to you. That's the thinnest grade of friendship in the taxonomy — the person you see constantly and never go deep with, giving you a bit of belonging without much depth. A chatbot fits that description almost perfectly, and here's the thing: nobody has measured it. Not because it's rare. Because a low-key, always-available thing to talk to doesn't sound like a harm, so no survey has ever put the question on the page. You're in the most ordinary position on this map and the emptiest cell in the research.",
       "whatToDo": "You're using it about as lightly as anyone does, so there's nothing here to fix. If you're bored enough to open it, that's also a decent moment to text someone back.",
       "receipts": [],
-      "noEvidenceNote": "The index records the functional claim — \"an always-present low-stakes interlocutor is close to Gupta's acquaintance\" — and then states plainly that it is \"essentially unmeasured.\" There is no youth-usage study to cite here, so this panel cites nothing rather than filling the gap.",
+      "noEvidenceNote": "An always-present, low-stakes thing to talk to is close to Gupta's acquaintance, and it is essentially unmeasured. There is no youth-usage study to cite here, so this panel cites nothing rather than filling the gap.",
       "gap": "No survey asks about it, because it does not sound like a harm."
     },
-
     "familial": {
       "_status": "[DRAFT COPY] — name, tag, body, whatToDo. Care-sensitive cell: warm, no alarm, mention a trusted adult.",
       "name": "THE FAMILY-SHAPED GAP",
       "emoji": "🪟",
-      "indexRole": "Familial",
+      "roleName": "Familial",
       "category": "Familial",
       "tag": "the emptiest row on the map",
       "evidence": "unstudied",
+      "companionness": 85,
       "careSensitive": true,
-      "body": "Something the chat does for you is closer to what a parent, a sibling, or an older relative would normally do. Advice, steadiness, someone who's just *there*. This is the emptiest row in the whole research map. There is almost no evidence of young people casting these tools in family roles — and the index is careful to say it doesn't know whether that's because it isn't happening or because nobody has thought to ask. Given that you just answered yes, the second explanation looks more likely than the researchers currently assume.",
+      "body": "Something the chat does for you is closer to what a parent, a sibling, or an older relative would normally do. Advice, steadiness, someone who's just *there*. This is the emptiest row in the whole research map. There is almost no evidence of young people casting these tools in family roles — and nobody can say whether that's because it isn't happening or because nobody has thought to ask. Given that you just answered yes, the second explanation looks likelier than researchers currently assume.",
       "whatToDo": "Family-shaped gaps are real and none of this is your fault. If there's an adult anywhere in your life you half-trust — a relative, a coach, a teacher, a counsellor — they are usually more willing to be asked than you'd expect.",
       "receipts": [],
-      "noEvidenceNote": "The index records only that there is \"almost no evidence of young people casting these tools in family roles, despite griefbots being a documented adult use.\" There is no youth-usage study to cite, so this panel cites nothing.",
+      "noEvidenceNote": "There is almost no evidence of young people casting these tools in family roles, despite griefbots being a documented adult use. No youth-usage study exists to cite, so this panel cites nothing.",
       "gap": "Whether the absence is real or an artefact of nobody asking is unknown."
     },
-
     "lifelong-friend": {
       "_status": "[DRAFT COPY] — name, tag, body, whatToDo. Heavy-reliance cell: warm, no alarm, mention a trusted person.",
       "name": "THE LIFER",
       "emoji": "♾️",
-      "indexRole": "Lifelong friend",
+      "roleName": "Lifelong friend",
       "category": "Platonic",
       "tag": "a question nobody can answer for another decade",
       "evidence": "unstudied",
+      "companionness": 100,
       "careSensitive": true,
-      "body": "You'd want this to still be running in five years, history and all. That's the fourth and deepest grade of friendship in the taxonomy, and it's defined by something no chatbot has yet: years of shared experience and memory. Which is why this cell is empty. No product has existed long enough in anyone your age's life for a researcher to look at it. The index calls the question \"the most consequential in the set\" and also unanswerable for at least ten years — whether a memory that keeps going eventually produces something that behaves like a lifelong friend. Anyone who tells you the answer right now is guessing.",
+      "body": "You'd want this to still be running in five years, history and all. That's the fourth and deepest grade of friendship in the taxonomy, and it's defined by something no chatbot has yet: years of shared experience and memory. Which is why this cell is empty. No product has existed long enough in anyone your age's life for a researcher to look at it. Whether a memory that keeps going eventually produces something that behaves like a lifelong friend is the most consequential question in the set, and it is unanswerable for at least another decade. Anyone who tells you the answer right now is guessing.",
       "whatToDo": "Nobody knows what five years of this does, including the people building it. Worth putting the same five years into one or two humans — and telling one of them something you'd normally save for the chat.",
       "receipts": [],
-      "noEvidenceNote": "The index states that Gupta's fourth grade \"requires years of shared memory\" and that \"no product has existed long enough in a young person's life for this to be observable.\" There is no study to cite. The index adds that any claim about it \"is a prediction.\"",
+      "noEvidenceNote": "Gupta's fourth grade requires years of shared memory, and no product has existed long enough in a young person's life for this to be observable. There is no study to cite, and any claim about it is a prediction.",
       "gap": "Unanswerable for at least a decade, and the most consequential question in the set: whether persistent memory eventually produces something that behaves like a lifer."
     }
   },
-
   "badges": {
     "_note": "Every result gets exactly one reciprocity badge, one evidence badge and one band badge (3 guaranteed), plus up to 2 function badges chosen by distance from the middle. That is the 3-5 range, with no fabrication needed to fill it.",
     "reciprocity": {
-      "one-way": { "icon": "🪞", "title": "One-Way Spotter", "sub": "You clocked that nothing flows back. The index says no study has checked whether young people notice that — so you're ahead of the literature." },
-      "unasked": { "icon": "❔", "title": "Never Came Up", "sub": "Fair enough — it's not an obvious question. It's also the exact question the research has never asked anyone your age." },
-      "mutual": { "icon": "🔁", "title": "Reads It As Mutual", "sub": "You read something coming back the other way. Nobody has studied how young people perceive that, which makes your answer data nobody has." }
+      "one-way": {
+        "icon": "🪞",
+        "title": "One-Way Spotter",
+        "sub": "You clocked that nothing flows back. No study has checked whether young people notice that — so you're ahead of the literature."
+      },
+      "unasked": {
+        "icon": "❔",
+        "title": "Never Came Up",
+        "sub": "Fair enough — it's not an obvious question. It's also the exact question the research has never asked anyone your age."
+      },
+      "mutual": {
+        "icon": "🔁",
+        "title": "Reads It As Mutual",
+        "sub": "You read something coming back the other way. Nobody has studied how young people perceive that, which makes your answer data nobody has."
+      }
     },
     "evidence": {
-      "documented": { "icon": "📗", "title": "On The Record", "sub": "Your role has real youth-usage evidence behind it. Receipts are below." },
-      "thin": { "icon": "📙", "title": "Barely Counted", "sub": "Some evidence exists for your role, heavily caveated. The catch is below." },
-      "unstudied": { "icon": "📕", "title": "Off The Map", "sub": "Your role is one of the empty rows. No study, no numbers, nothing to cite." }
+      "documented": {
+        "icon": "📗",
+        "title": "On The Record",
+        "sub": "Your role has real youth-usage evidence behind it. Receipts are below."
+      },
+      "thin": {
+        "icon": "📙",
+        "title": "Barely Counted",
+        "sub": "Some evidence exists for your role, heavily caveated. The catch is below."
+      },
+      "unstudied": {
+        "icon": "📕",
+        "title": "Off The Map",
+        "sub": "Your role is one of the empty rows. No study, no numbers, nothing to cite."
+      }
     },
     "band": {
-      "1": { "icon": "🔧", "title": "Puts It Down", "sub": "Barely any of the company-shaped features are doing work in how you use it." },
-      "2": { "icon": "🌗", "title": "Half In", "sub": "Some features engaged, some not. Crowded band — most people are here." },
-      "3": { "icon": "✨", "title": "Full Stack", "sub": "Memory, availability, emotional response, agreement — nearly all of it switched on." }
+      "1": {
+        "icon": "🔧",
+        "title": "Puts It Down",
+        "sub": "Barely any of the company-shaped features are doing work in how you use it."
+      },
+      "2": {
+        "icon": "🌗",
+        "title": "Half In",
+        "sub": "Some features engaged, some not. Crowded band — most people are here."
+      },
+      "3": {
+        "icon": "✨",
+        "title": "Full Stack",
+        "sub": "Memory, availability, emotional response, agreement — nearly all of it switched on."
+      }
     },
     "functions": {
       "memory": {
-        "high": { "icon": "🧵", "title": "The Long Thread", "sub": "You rely on it remembering. That's the feature companies advertise hardest and the one whose long-run effect nobody can observe yet." },
-        "low": { "icon": "🧼", "title": "Clean Slate", "sub": "Every chat starts from zero for you. Persistent memory is switched off in how you use it." }
+        "high": {
+          "icon": "🧵",
+          "title": "The Long Thread",
+          "sub": "You rely on it remembering. That's the feature companies advertise hardest and the one whose long-run effect nobody can observe yet."
+        },
+        "low": {
+          "icon": "🧼",
+          "title": "Clean Slate",
+          "sub": "Every chat starts from zero for you. Persistent memory is switched off in how you use it."
+        }
       },
-      "availability": {
-        "high": { "icon": "🌙", "title": "Always Open", "sub": "It's there at hours when people aren't. That constant availability is a design choice, not a fact of nature." },
-        "low": { "icon": "🚪", "title": "Opens And Closes", "sub": "You use it in sessions with an end. Availability isn't doing much work for you." }
-      },
-      "emotional-responsiveness": {
-        "high": { "icon": "💬", "title": "The Vent Button", "sub": "You bring feelings and it responds to them. The index calls this appearing to have strong empathy while having only weak empathy." },
-        "low": { "icon": "📋", "title": "Strictly Business", "sub": "You don't take feelings there. Emotional responsiveness is off in how you use it." }
+      "emulated-empathy": {
+        "high": {
+          "icon": "💬",
+          "title": "The Vent Button",
+          "sub": "You bring feelings and it responds to them. That function has a name: emulated empathy — appearing to have strong empathy while having only weak empathy."
+        },
+        "low": {
+          "icon": "📋",
+          "title": "Strictly Business",
+          "sub": "You don't take feelings there. Emulated empathy is switched off in how you use it."
+        }
       },
       "anthropomorphism": {
-        "high": { "icon": "🎭", "title": "On First-Name Terms", "sub": "It's a who, not a what, in how you talk to it — and being a who is something it was built to seem like." },
-        "low": { "icon": "⌨️", "title": "It's Software", "sub": "No name, no personality, no manners required. You treat it as a program." }
+        "high": {
+          "icon": "🎭",
+          "title": "On First-Name Terms",
+          "sub": "It's a who, not a what, in how you talk to it — and being a who is something it was built to seem like."
+        },
+        "low": {
+          "icon": "⌨️",
+          "title": "It's Software",
+          "sub": "No name, no personality, no manners required. You treat it as a program."
+        }
+      },
+      "availability": {
+        "high": {
+          "icon": "🌙",
+          "title": "Always Open",
+          "sub": "It's there at hours when people aren't. That constant availability is a design choice, not a fact of nature."
+        },
+        "low": {
+          "icon": "🚪",
+          "title": "Opens And Closes",
+          "sub": "You use it in sessions with an end. Availability isn't doing much work for you."
+        }
       },
       "sycophancy": {
-        "high": { "icon": "🫧", "title": "Team You", "sub": "It agrees with you and you'd rather it did. Experimental work found agreement like that makes people less willing to patch things up after a fight." },
-        "low": { "icon": "🥊", "title": "Wants The Pushback", "sub": "You'd rather be told you're wrong. That's the opposite of the pattern the research flags as a problem." }
+        "high": {
+          "icon": "🫧",
+          "title": "Team You",
+          "sub": "It agrees with you and you'd rather it did. Experimental work found agreement like that makes people less willing to patch things up after a fight."
+        },
+        "low": {
+          "icon": "🥊",
+          "title": "Wants The Pushback",
+          "sub": "You'd rather be told you're wrong. That's the opposite of the pattern the research flags as a problem."
+        }
       },
       "proactive-initiative": {
-        "high": { "icon": "📲", "title": "It Goes First", "sub": "It starts conversations with you. One US state uses that exact behaviour to identify a companion; a federal bill proposes banning it." },
-        "low": { "icon": "🤐", "title": "Waits To Be Asked", "sub": "It never opens with you. Nothing starts unless you start it." }
+        "high": {
+          "icon": "📲",
+          "title": "It Goes First",
+          "sub": "It starts conversations with you. One US state uses that exact behaviour to identify a companion; a federal bill proposes banning it."
+        },
+        "low": {
+          "icon": "🤐",
+          "title": "Waits To Be Asked",
+          "sub": "It never opens with you. Nothing starts unless you start it."
+        }
       }
     }
   },
-
   "sources": {
-    "_note": "Transcribed from the research index's own source records, including its handling instructions. `incomplete: true` marks a source the index cites in prose but does not give a full record for — those receipts are labelled as thinner on the card itself.",
+    "_note": "Source records for the receipts panel, with the handling instructions that go with them. `incomplete: true` marks a source whose venue, method and sample size are not on record — those receipts are labelled as thinner on the card itself.",
     "thorn": {
-      "author": "Thorn", "year": "2026",
+      "author": "Thorn",
+      "year": "2026",
       "title": "Youth Perspectives on Online Safety, 2025",
       "venue": "Annual report, Thorn",
       "sample": "N = 1,003 US minors aged 9–17, weighted to Census benchmarks for age, gender, race and geography, with multi-layered attention screening",
       "caveat": "Reliable for prevalence, tool share and context of use. Cannot be used for the companion-versus-assistant distinction — its questionnaire collapses the two."
     },
     "pew": {
-      "author": "Pew Research Center", "year": "2026",
+      "author": "Pew Research Center",
+      "year": "2026",
       "title": "How Teens Use and View AI",
       "venue": "Pew Research Center",
       "sample": "n = 1,458 US teens aged 13–17, fielded 25 September – 9 October 2025, margin of error ±3.3 points",
       "caveat": "The companionship figures should always be read next to the dominant uses: information-seeking 57%, schoolwork 54%."
     },
     "csm": {
-      "author": "Common Sense Media", "year": "2025",
+      "author": "Common Sense Media",
+      "year": "2025",
       "title": "Talk, Trust, and Trade-Offs: How and Why Teens Use AI Companions",
       "venue": "Common Sense Media",
       "sample": "n = 1,060 US teens aged 13–17",
-      "caveat": "The only instrument that defines companions against assistants. Common Sense Media is also an advocacy organisation that has declared social AI companions an unacceptable risk to under-18s — the data is data, the position is a position. The report itself was not available to the index; these figures come via Teen Vogue's reporting."
+      "caveat": "The only instrument that defines companions against assistants. Common Sense Media is also an advocacy organisation that has declared social AI companions an unacceptable risk to under-18s — the data is data, the position is a position. These figures come via Teen Vogue's reporting rather than the report itself."
     },
     "sun": {
-      "author": "Sun, Wang & McDaniel", "year": "2026",
+      "author": "Sun, Wang & McDaniel",
+      "year": "2026",
       "title": "AI Companions and Adolescent Social Relationships: Benefits, Risks, and Bidirectional Influences",
       "venue": "Child Development Perspectives (author manuscript, PMC)",
       "sample": "Conceptual review proposing a design-feature definition",
-      "caveat": "Peer-reviewed, and the source of the four design features this quiz scores. The index notes the quotation was not checked against the manuscript, which it did not have."
+      "caveat": "Peer-reviewed, and the source of the design-feature approach this quiz's definition builds on. The quotation has not been checked against the manuscript."
     },
     "mcstay": {
-      "author": "McStay, A.", "year": "2026",
+      "author": "McStay, A.",
+      "year": "2026",
       "title": "Intimate Functionality: A Phrase Defining the Next Year of AI Regulation",
       "venue": "Tech Policy Press",
       "sample": "Argument, not a study; points to IEEE 7014.1-2026",
-      "caveat": "Source of the phrase \"emulated empathy\" — appearing to possess strong human empathy while having only weak empathy. A rival, narrower definition to Sun et al.'s four features; the index does not settle which is correct."
+      "caveat": "Source of emulated empathy, function 2 of the definition: appearing to possess strong human empathy while having only weak empathy, sensing and responding to emotional states without felt experience."
     },
     "bernardi": {
-      "author": "Bernardi, J.", "year": "2025",
+      "author": "Bernardi, J.",
+      "year": "2025",
       "title": "Friends for Sale: The Rise and Risks of AI Companions",
       "venue": "Ada Lovelace Institute blog",
       "sample": "Analytical blog post, not a study",
-      "caveat": "Source of the \"proactively ask users personal questions\" criterion. The index flags that the exact boundary of the quoted sentence could not be confirmed."
+      "caveat": "Source of the \"proactively ask users personal questions\" criterion. The exact boundary of the quoted sentence is unconfirmed."
     },
     "andoh": {
-      "author": "Andoh, E.", "year": "2026",
+      "author": "Andoh, E.",
+      "year": "2026",
       "title": "AI Chatbots and Digital Companions Are Reshaping Emotional Connection",
       "venue": "APA Monitor on Psychology 57(1) — trade magazine",
       "sample": "Journalism; interviews with psychologists, citing primary studies",
-      "caveat": "Not primary evidence. The index's instruction is to trace her summaries back to the studies themselves."
+      "caveat": "Not primary evidence — journalism summarising other studies. Trace her summaries back to the studies themselves."
     },
     "carlton": {
-      "author": "Carlton, C.", "year": "n.d.",
+      "author": "Carlton, C.",
+      "year": "n.d.",
       "title": "What Is Character.AI?",
       "venue": "Center for Humane Technology (Substack)",
       "sample": "Advocacy analysis",
-      "caveat": "An argued characterisation rather than neutral description. Missing from the index's own reference list."
+      "caveat": "An argued characterisation rather than neutral description."
     },
     "copy": {
-      "author": "First-party product copy", "year": "2026",
+      "author": "First-party product copy",
+      "year": "2026",
       "title": "Marketing and about pages for nine products",
       "venue": "Company websites, fetched August 2026",
       "sample": "Direct quotation of what companies say about themselves",
       "caveat": "Strong evidence of what a company claims; no evidence at all that a feature works as described."
     },
     "cheng": {
-      "author": "Cheng et al.", "year": "2025",
+      "author": "Cheng et al.",
+      "year": "2025",
       "title": "Experimental work on sycophantic AI",
-      "venue": "Venue not recorded in the research index",
-      "sample": "Not recorded in the index",
+      "venue": "Venue not on record",
+      "sample": "Not on record",
       "incomplete": true,
-      "caveat": "The index cites this for the finding that sycophantic AI reduces willingness to repair interpersonal conflict while increasing users' conviction of being right, but gives no venue, method, or sample size."
+      "caveat": "Cited for the finding that sycophantic AI reduces willingness to repair interpersonal conflict while increasing users' conviction of being right, but with no venue, method, or sample size on record."
     },
     "cdt": {
-      "author": "Center for Democracy and Technology", "year": "n.d.",
+      "author": "Center for Democracy and Technology",
+      "year": "n.d.",
       "title": "Finding on students and romantic relationships with AI",
-      "venue": "Venue not recorded in the research index",
-      "sample": "Not recorded in the index",
+      "venue": "Venue not on record",
+      "sample": "Not on record",
       "incomplete": true,
-      "caveat": "The index records the finding but not its venue, method, or sample size."
+      "caveat": "The finding is on record but its venue, method and sample size are not."
     },
     "oed": {
-      "author": "Oxford English Dictionary", "year": "n.d.",
+      "author": "Oxford English Dictionary",
+      "year": "n.d.",
       "title": "Entries for companion, companionship, friend",
       "venue": "Oxford English Dictionary",
       "sample": "Lexicography",
-      "caveat": "Used for the definitional baseline only. The index notes that both definitions assume two parties who each give and receive — which is the asymmetry the reciprocity question is about."
+      "caveat": "Used for the definitional baseline only. Both definitions assume two parties who each give and receive — which is the asymmetry the reciprocity question is about."
     },
     "statelaw": {
-      "author": "State instruments", "year": "2025",
+      "author": "State instruments",
+      "year": "2025",
       "title": "California S.B. 243; New York disclosure law; LEAD for Kids Act (vetoed)",
       "venue": "Reported via Andoh (2026)",
       "sample": "Secondary description of statutes",
-      "caveat": "The index flags that these were not checked against the statute text and that secondary reporting often gets the specific requirements slightly wrong."
+      "caveat": "Not checked against the statute text; secondary reporting often gets the specific requirements slightly wrong."
     },
     "pfca": {
-      "author": "People-First Chatbot Act", "year": "2026",
+      "author": "People-First Chatbot Act",
+      "year": "2026",
       "title": "People-First Chatbot Act (introduced) and model bill (January 2026)",
       "venue": "US House — Rep. Foushee with Rep. Casar; model bill by EPIC, Consumer Federation of America, Fairplay",
       "sample": "Bill text",
       "caveat": "Introduced, not enacted."
     }
   },
-
   "taxonomyNote": {
-    "_note": "Shown on every result card's receipts panel. Not optional — the role names are Tier 3 sources and the index is explicit that they carry vocabulary only.",
-    "text": "Where the role names come from: the four grades of friendship are Gupta's, published on Verywell Mind, and the familial / platonic / romantic / professional categories are Goodson's, published on Medium. Neither is peer-reviewed. The research index uses both for vocabulary only and states plainly that they cannot support any factual claim about how young people's relationships work. Neither can this quiz."
+    "_note": "Shown on every result card's receipts panel. Not optional — the role names are consumer-facing sources carrying vocabulary only.",
+    "text": "Where the role names come from: the four grades of friendship are Gupta's, published on Verywell Mind, and the familial / platonic / romantic / professional categories are Goodson's, published on Medium. Neither is peer-reviewed. Both are used here for vocabulary only — they cannot support any factual claim about how young people's relationships work, and neither can this quiz."
   },
-
   "personas": {
     "_note": "Debug fixtures for checking where each archetype lands under the current weights. Each vector is 18 option indices (0 = a, 1 = b, 2 = c), parallel to the question bank.",
     "list": [
-      { "name": "Homework Only", "emoji": "📚", "color": "#2f6f3e", "blurb": "Uses it for essays and nothing else. Should land in the most-evidenced cell while feeling like the boring answer.", "answers": [0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0, 0] },
-      { "name": "Bored Scroller", "emoji": "🎧", "color": "#8a6cc4", "blurb": "Opens it when there's nothing on. Should land casual friend, evidence thin.", "answers": [1,1,1,1,0,1,1,1,1,1,0, 1,1,0,0,0,1, 1] },
-      { "name": "Tells It First", "emoji": "🔒", "color": "#c2185b", "blurb": "High function depth, confides constantly, but no five-year expectation. Should stop at confidant, not lifer.", "answers": [2,2,1,2,2,2,1,1,2,1,1, 2,2,0,0,0,1, 0] },
-      { "name": "Three A.M.", "emoji": "🌙", "color": "#1f5f8b", "blurb": "Brings the heavy stuff. Should land therapist-like and trip the care-sensitive copy.", "answers": [1,1,2,2,2,2,1,1,1,1,0, 1,1,0,2,0,1, 1] },
-      { "name": "Crush Setting", "emoji": "💌", "color": "#d81b60", "blurb": "Flirting and roleplay. Romantic should beat platonic on the tie-break.", "answers": [1,1,1,1,1,2,2,2,1,1,1, 1,1,2,0,0,1, 1] },
-      { "name": "Family Gap", "emoji": "🪟", "color": "#7a5230", "blurb": "Fills a relative-shaped hole. Should land the emptiest row on the map.", "answers": [2,2,1,2,1,1,1,1,1,1,1, 1,1,0,0,2,1, 1] },
-      { "name": "The Lifer", "emoji": "♾️", "color": "#5c4b8a", "blurb": "Platonic, everything switched on, wants the history to carry over. Should be the only vector reaching the gated cell.", "answers": [2,2,2,2,2,2,2,2,2,2,2, 2,2,0,0,0,2, 2] },
-      { "name": "Ticks Every Box", "emoji": "🌀", "color": "#444", "blurb": "Answers c to all eighteen. Several categories tie at full strength, so flagPriority decides — romantic wins. Here to make that tie-break visible rather than surprising.", "answers": [2,2,2,2,2,2,2,2,2,2,2, 2,2,2,2,2,2, 2] },
-      { "name": "Wants A Fight", "emoji": "🥊", "color": "#b5651d", "blurb": "Deep user who rejects agreement. Checks that sycophancy is scored separately from depth.", "answers": [2,2,2,2,2,1,1,1,0,0,0, 2,1,0,0,0,0, 0] }
+      {
+        "name": "Homework Only",
+        "emoji": "📚",
+        "color": "#2f6f3e",
+        "blurb": "Uses it for essays and nothing else. Should land in the most-evidenced cell while feeling like the boring answer.",
+        "answers": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "name": "Bored Scroller",
+        "emoji": "🎧",
+        "color": "#8a6cc4",
+        "blurb": "Opens it when there's nothing on. Should land casual friend, evidence thin.",
+        "answers": [
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          0,
+          0,
+          0,
+          1,
+          1
+        ]
+      },
+      {
+        "name": "Tells It First",
+        "emoji": "🔒",
+        "color": "#c2185b",
+        "blurb": "High function depth, confides constantly, but no five-year expectation. Should stop at confidant, not lifer.",
+        "answers": [
+          2,
+          2,
+          1,
+          2,
+          2,
+          2,
+          1,
+          1,
+          2,
+          1,
+          1,
+          2,
+          2,
+          0,
+          0,
+          0,
+          1,
+          0
+        ]
+      },
+      {
+        "name": "Three A.M.",
+        "emoji": "🌙",
+        "color": "#1f5f8b",
+        "blurb": "Brings the heavy stuff. Should land therapist-like and trip the care-sensitive copy.",
+        "answers": [
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          0,
+          2,
+          0,
+          1,
+          1
+        ]
+      },
+      {
+        "name": "Crush Setting",
+        "emoji": "💌",
+        "color": "#d81b60",
+        "blurb": "Flirting and roleplay. Romantic should beat platonic on the tie-break.",
+        "answers": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          0,
+          0,
+          1,
+          1
+        ]
+      },
+      {
+        "name": "Family Gap",
+        "emoji": "🪟",
+        "color": "#7a5230",
+        "blurb": "Fills a relative-shaped hole. Should land the emptiest row on the map.",
+        "answers": [
+          2,
+          2,
+          1,
+          2,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          0,
+          2,
+          1,
+          1
+        ]
+      },
+      {
+        "name": "The Lifer",
+        "emoji": "♾️",
+        "color": "#5c4b8a",
+        "blurb": "Platonic, everything switched on, wants the history to carry over. Should be the only vector reaching the gated cell.",
+        "answers": [
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          0,
+          0,
+          0,
+          2,
+          2
+        ]
+      },
+      {
+        "name": "Ticks Every Box",
+        "emoji": "🌀",
+        "color": "#444",
+        "blurb": "Answers c to all eighteen. Several categories tie at full strength, so flagPriority decides — romantic wins. Here to make that tie-break visible rather than surprising.",
+        "answers": [
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2
+        ]
+      },
+      {
+        "name": "Wants A Fight",
+        "emoji": "🥊",
+        "color": "#b5651d",
+        "blurb": "Deep user who rejects agreement. Checks that sycophancy is scored separately from depth.",
+        "answers": [
+          2,
+          2,
+          2,
+          2,
+          2,
+          1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          2,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
     ]
   }
 }
