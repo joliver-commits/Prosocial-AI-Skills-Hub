@@ -1,10 +1,39 @@
 # Is Your AI Good For You?
 
-A static, single-page quiz that takes how a young person actually uses an AI tool and plots that usage on a companion index: which human friendship role their habits most resemble, and how much of the companion feature set those habits switch on.
+A static, single-page quiz that takes how a young person actually uses an AI tool and plots that usage on a companion index: which human friendship role their habits most resemble, and how much of the companion function set those habits switch on.
 
 The point is diagnostic, not matchmaking. Answer honestly and the quiz names the relational role you've handed to a chatbot — and then tells you whether any researcher has studied young people doing the same thing. **Three of the eight result cells are empty in the literature.** Saying so out loud, in the result card, is the feature.
 
 Plain HTML, CSS and vanilla JavaScript. No build step, no framework, no npm, no webfonts, no network requests beyond two local JSON files.
+
+## The definition
+
+Everything here is built on one definition:
+
+> Companion AI refers to any AI tool that demonstrates the following four functions: **persistent memory, emulated empathy, anthropomorphism,** and **constant availability**.
+
+| Function | Definition |
+|---|---|
+| **Persistent memory** | The capacity to retain information disclosed in prior interactions (facts, preferences, emotional history) and to draw on it so that the relationship appears to accumulate over time. |
+| **Emulated empathy** | From Andrew McStay: the function of appearing to possess strong human empathy while having only weak empathy, sensing and responding to emotional states without felt experience. |
+| **Anthropomorphism** | The function of presenting as human or human-like; through first-person address, a name or persona, a human-like voice, and expressed emotions, such that the user relates to the system as *someone* rather than *something*. |
+| **Constant availability** | The property of being reachable at any time, without limit on duration or frequency, and without the reciprocal claims that human relationships impose. |
+
+Eight of the eighteen questions score these four directly, two per function, and the result reports how many of the four a person's own habits switch on — a tool can ship all four and still have only one of them engaged by how someone uses it.
+
+**Sycophancy** and **proactive relational initiative** are scored on the same axis but are *not* part of the definition. They carry `inDefinition: false` in the data and are labelled as additional design functions everywhere they appear. They are never counted in the "engages N of the 4" readout.
+
+The definition text is stored verbatim in `data/results.json` under `definition` and rendered as written. Do not paraphrase it.
+
+## Companionness
+
+Each result reports a position on a 0–100 companionness scale — how companion-like that pattern of use is — anchored at four fixed points:
+
+| Doesn't use AI | Assistant | Confidant | Partner or best friend |
+|---|---|---|---|
+| 0 | 25 | 75 | 100 |
+
+Companionness is a property of the resolved **role**, not a measurement of the person, and it is not a score out of anything. Values live under each role's `companionness` key. The four anchors are fixed; the intermediate values (acquaintance 15, casual friend 45, therapist-like 70, familial 85) are a first pass and are the most arguable numbers in the project.
 
 ## Contents
 
@@ -18,8 +47,6 @@ quiz/
 │   └── results.json    result cells, copy, badges, evidence status, receipts
 ├── QUESTIONS.md        audit table: question → axis → role → source
 └── README.md           this file
-research/
-└── companion-ai-research-index.html    the source of truth
 ```
 
 ## Run it locally
@@ -43,7 +70,7 @@ Opening `index.html` straight from disk shows a message explaining this rather t
 
 Nothing needs building. There is no server side, so there is nothing to configure.
 
-If you'd rather the quiz *be* the site root, move the four files and `data/` up one level and change the two textual references to `research/companion-ai-research-index.html` in `data/results.json` and `index.html`. Note that root also holds this repository's own `README.md`, which GitHub Pages would otherwise render as the homepage.
+If you'd rather the quiz *be* the site root, move the four files and `data/` up one level. Note that root also holds this repository's own `README.md`, which GitHub Pages would otherwise render as the homepage.
 
 ## Editing questions without touching code
 
@@ -60,6 +87,8 @@ Edit `text` (the question) or `label` (an answer) in `data/questions.json`. Noth
 | `x` | Function-depth points, 0–2. The X-axis maximum recalculates itself, so you cannot break the scale by editing a weight. |
 | `depth` | Role-depth points. |
 | `flags` | Category strength, e.g. `{"romantic": 2}`. Compared as a share of that flag's own maximum across the bank, so adding a question to one category does not quietly starve the others. |
+| `functions.<key>.engagedAt` | The score at which one of the four defining functions counts as switched on. Currently 3 of a possible 4. |
+| `roles.<key>.companionness` | Where that role sits on the 0–100 companionness scale. |
 | `config.depthMax` | Raise it to make the deep cells harder to reach; lower it to make them easier. |
 | `config.flagPriority` | Tie-break order when two categories come out equally strong. |
 
@@ -67,7 +96,7 @@ Edit `text` (the question) or `label` (an answer) in `data/questions.json`. Noth
 
 Edit the entry under `roles` in `data/results.json`: `name`, `tag`, `body`, `whatToDo`. `body` accepts `*emphasis*` and nothing else.
 
-**Do not reword `evidence`, `receipts`, `gap`, `noEvidenceNote` or anything under `sources` without checking the research index.** Those are transcribed, including the caveats. A receipt that drifts from the index is worse than no receipt.
+**Do not reword `definition`, `evidence`, `receipts`, `gap`, `noEvidenceNote` or anything under `sources` without checking the underlying source.** Those are transcribed, caveats included. A receipt that drifts from the study it names is worse than no receipt.
 
 ### Add or remove a question
 
@@ -99,7 +128,7 @@ This quiz argues that relational harm lives in design functions. It cannot use t
 
 ## Credits
 
-Built from **Jane Oliver**, *What Is an "AI Companion"? The definitional problem · research index* (working draft, August 2026, Berkman Klein Center). A copy is committed at `research/companion-ai-research-index.html`; every role, evidence status and citation in the quiz traces to it, and `QUESTIONS.md` records exactly where.
+The four-function definition of companion AI is Jane Oliver's, with emulated empathy drawn from Andrew McStay. Role vocabulary derives from Gupta's four grades of friendship (acquaintance, casual, close, lifelong) plus Goodson's broader familial / platonic / romantic / professional categories; neither source is peer-reviewed and both are used for vocabulary only. Evidence in the receipts panel comes from Thorn (2026), Pew Research Center (2026), Common Sense Media (2025), Sun, Wang & McDaniel (2026), Andoh (2026), Bernardi (2025) and McStay (2026), each cited on the card with its sample size and caveats. `QUESTIONS.md` records which question rests on which source.
 
 Format and mechanics owe a great deal to **Jack Cushman's** [AI Alignment Love Match](https://jackcushman.org/apps/triad-quiz/) — the two-axis grid with a plotted pin, normalising each axis over answered items only, bit-packed share codes in the URL, collectible badges from hidden sub-scales, and the persona debug panel are all adapted from it. Its analytics beacon and its per-answer compliments are the two things deliberately not carried over.
 
