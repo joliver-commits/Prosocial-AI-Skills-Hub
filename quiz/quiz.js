@@ -498,8 +498,24 @@ var QUIZ = {
     el('sharednote').hidden = !isShared;
 
     el('rolename').textContent = role.emoji + ' ' + role.name;
-    el('roletag').textContent = role.indexRole + ' · ' + role.category + ' · ' + role.tag;
+    el('roletag').textContent = role.roleName + ' · ' + role.category + ' · ' + role.tag;
     el('rolebody').innerHTML = mdish(role.body);
+
+    // companionness: a property of the resolved role, shown on a fixed anchored scale
+    var cs = R.pageFurniture.companionnessScale;
+    el('cmplabel').textContent = cs.label;
+    el('cmpnum').textContent = role.companionness;
+    el('cmpcaption').textContent = cs.caption;
+    el('cmpfill').style.width = role.companionness + '%';
+    el('cmppin').style.left = role.companionness + '%';
+    var meter = el('cmpmeter');
+    meter.setAttribute('aria-valuenow', role.companionness);
+    meter.setAttribute('aria-valuetext', role.companionness + '% — ' + nearestAnchor(cs.anchors, role.companionness));
+    el('cmpanchors').innerHTML = cs.anchors.map(function (a) {
+      return '<li style="left:' + a.v + '%"><span class="cv">' + a.v + '</span>' + esc(a.t) + '</li>';
+    }).join('');
+
+    renderDefinition(scores);
 
     el('bandname').textContent = band.emoji + ' ' + band.name;
     el('bandblurb').textContent = band.blurb;
@@ -544,6 +560,43 @@ var QUIZ = {
   }
 };
 
+
+function nearestAnchor(anchors, v) {
+  var best = anchors[0];
+  anchors.forEach(function (a) {
+    if (Math.abs(a.v - v) < Math.abs(best.v - v)) best = a;
+  });
+  return best.t;
+}
+
+/* The four-function definition, and which of the four this person's habits
+   actually switch on. A tool can ship all four and still only have one of
+   them engaged by how someone uses it, which is the distinction the panel
+   is there to make. Sycophancy and proactive initiative are scored on the
+   same axis but are not part of the definition, so they are not counted here. */
+function renderDefinition(scores) {
+  var def = R.definition;
+  var f = R.pageFurniture.definitionPanel;
+  el('defsummary').textContent = f.summary;
+  el('deflead').textContent = f.lead;
+  el('defstatement').textContent = def.statement;
+
+  var met = 0;
+  var items = def.functions.map(function (fn) {
+    var spec = R.functions[fn.key] || {};
+    var total = scores.funcs[fn.key] || 0;
+    var on = spec.engagedAt != null && total >= spec.engagedAt;
+    if (on) met++;
+    return '<li class="' + (on ? 'on' : 'off') + '">' +
+      '<span class="dmark" aria-hidden="true">' + (on ? '\u2713' : '\u2014') + '</span>' +
+      '<span class="dname">' + esc(fn.name) + '</span>' +
+      '<span class="dstate">' + (on ? 'engaged by how you use it' : 'not engaged by how you use it') + '</span>' +
+      '<span class="dtext">' + esc(fn.text) + '</span></li>';
+  });
+  el('defmet').textContent = f.metTemplate.replace('{n}', met);
+  el('deflist').innerHTML = items.join('');
+}
+
 /* very small subset of markdown: *emphasis* only, so copy can be written plainly */
 function mdish(s) {
   return esc(s).replace(/\*([^*]+)\*/g, '<em>$1</em>');
@@ -570,8 +623,8 @@ function renderReceipts(role) {
       if (r.context) h += '<p class="rmeta"><span class="rlabel">Read it with:</span> ' + esc(r.context) + '</p>';
       h += '<p class="rmeta"><span class="rlabel">Handle with care:</span> ' + esc(s.caveat) + '</p>';
       if (s.incomplete) {
-        h += '<p class="rmeta rwarn">The research index does not record a venue, method, or sample size for this one. ' +
-          'It is here because dropping it would hide a claim the index makes, not because it is as solid as the others.</p>';
+        h += '<p class="rmeta rwarn">No venue, method, or sample size is on record for this one. ' +
+          'It is here because leaving it out would hide a claim that gets made, not because it is as solid as the others.</p>';
       }
       h += '</li>';
     });
@@ -580,10 +633,8 @@ function renderReceipts(role) {
     h += '<p class="rnone">' + esc(role.noEvidenceNote || 'No youth-usage evidence is recorded for this role.') + '</p>';
   }
 
-  h += '<p class="rgap"><span class="rlabel">What the index says is missing:</span> ' + esc(role.gap) + '</p>';
+  h += '<p class="rgap"><span class="rlabel">What is still missing:</span> ' + esc(role.gap) + '</p>';
   h += '<p class="rtax">' + esc(R.taxonomyNote.text) + '</p>';
-  h += '<p class="rsrc">All of the above is transcribed from ' + esc(Q.meta.sourceLabel) +
-    ' A copy is in this repository at <code>' + esc(Q.meta.sourceOfTruth) + '</code>.</p>';
   return h;
 }
 
@@ -758,6 +809,7 @@ function paintFurniture() {
   el('retakebtn').textContent = f.retakeButton;
   el('timeest').textContent = f.timeEstimate;
   el('receiptssummary').textContent = f.receiptsSummary;
+  el('defsummary').textContent = f.definitionPanel.summary;
   el('caregap').textContent = f.careNote;
 
   var g = f.gridLabels;

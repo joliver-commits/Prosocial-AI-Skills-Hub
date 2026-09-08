@@ -100,12 +100,33 @@
       <!-- banded score panel -->
       <div class="scorepanel">
         <p class="sptitle">your score</p>
+
+        <p class="cmplabel" id="cmplabel"></p>
+        <p class="cmpvalue"><span id="cmpnum"></span><span class="cmppc">%</span></p>
+        <div class="cmpmeter" role="meter" id="cmpmeter" aria-label="Companionness" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <div class="cmpfill" id="cmpfill"></div>
+          <span class="cmppin" id="cmppin" aria-hidden="true"></span>
+        </div>
+        <ul class="cmpanchors" id="cmpanchors" aria-hidden="true"></ul>
+        <p class="cmpcaption" id="cmpcaption"></p>
+
         <p class="spband" id="bandname"></p>
         <div class="spmeter" role="meter" aria-label="Function depth out of 100" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
           <div class="spfill" id="bandmeter"></div>
         </div>
         <p class="spblurb" id="bandblurb"></p>
       </div>
+
+      <!-- the four-function definition, and how many of them this use engages -->
+      <details class="defbox">
+        <summary id="defsummary">📐 what counts as companion AI</summary>
+        <div class="defbody">
+          <p class="deflead" id="deflead"></p>
+          <p class="defstatement" id="defstatement"></p>
+          <p class="defmet" id="defmet"></p>
+          <ul class="deflist" id="deflist"></ul>
+        </div>
+      </details>
 
       <!-- two-axis grid -->
       <div class="gridwrap">
@@ -174,9 +195,10 @@
       your progress is kept in your own browser's storage and you can wipe it with the start-over button.
     </p>
     <p class="footnote">
-      Built from <em>What Is an "AI Companion"? The definitional problem</em> (Oliver, working draft, August 2026,
-      Berkman Klein Center), included in this repository at <code>research/companion-ai-research-index.html</code>.
-      Quiz format owes its two-axis grid, share codes and persona debug panel to
+      Role vocabulary derives from Gupta's four grades of friendship plus Goodson's broader familial, platonic,
+      romantic and professional categories — neither peer-reviewed, both used for vocabulary only. Evidence is
+      cited on each result card with its sample size and caveats. Quiz format owes its two-axis grid, share codes
+      and persona debug panel to
       <a href="https://jackcushman.org/apps/triad-quiz/">Jack Cushman's AI Alignment Love Match</a>.
     </p>
     <p class="footnote">
