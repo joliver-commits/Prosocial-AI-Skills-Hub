@@ -90,7 +90,14 @@ Edit `text` (the question) or `label` (an answer) in `data/questions.json`. Noth
 | `functions.<key>.engagedAt` | The score at which one of the four defining functions counts as switched on. Currently 3 of a possible 4. |
 | `roles.<key>.companionness` | Where that role sits on the 0–100 companionness scale. |
 | `config.depthMax` | Raise it to make the deep cells harder to reach; lower it to make them easier. |
+| `config.breakAfter` | Which question the single pause screen follows. Currently 9 of 18. Set it to `null` for no break at all. |
 | `config.flagPriority` | Tie-break order when two categories come out equally strong. |
+
+### Change the break or the progress label
+
+The one pause screen sits after question `config.breakAfter` (9 of 18). Its copy — mark, heading, body, both buttons — is in `data/results.json` under `pageFurniture.breakScreen`. The progress bar's label template is next to it under `pageFurniture.progress`.
+
+The break fires once per run, only when moving forward. Going back across it and forward again does not re-trigger it, and a deep link straight to a later question skips it.
 
 ### Change a result card
 
@@ -119,6 +126,7 @@ This quiz argues that relational harm lives in design functions. It cannot use t
 ## Accessibility
 
 - Answers are real radio inputs in a `fieldset`/`legend`, so arrow keys move between them and screen readers announce the group. Pointer taps advance to the next question; keyboard selection does not, so you can arrow through the options without being thrown forward.
+- The progress bar is pinned to the bottom of the viewport while answering, with one segment per question and the current one raised and coloured. The `progressbar` role carries the semantics and the segments are `aria-hidden` decoration, so it is announced once, not eighteen times. It clears the iPhone home indicator via `env(safe-area-inset-bottom)` and reserves page padding so it never covers the Next button.
 - Visible focus rings on everything focusable; a skip link to the quiz.
 - The grid carries an `aria-label` naming the result and both coordinates; the score meter and progress bar carry live ARIA values.
 - No images at all — the newsprint grain, halftone and starburst are CSS, so there is no decorative image left uncaptioned.

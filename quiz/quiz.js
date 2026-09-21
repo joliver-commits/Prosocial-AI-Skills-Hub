@@ -303,6 +303,7 @@ var Router = {
 var QUIZ = {
   i: 0,
   done: false,
+  breakSeen: false,
   answers: [],
   _shareUrl: '',
   _advanceTimer: null,
@@ -311,7 +312,7 @@ var QUIZ = {
   save: function () {
     try {
       localStorage.setItem(SAVE_KEY, JSON.stringify({
-        v: Q.meta.version, i: this.i, done: this.done, answers: this.answers
+        v: Q.meta.version, i: this.i, done: this.done, answers: this.answers, breakSeen: this.breakSeen
       }));
     } catch (e) { /* private mode: the quiz still works, it just won't resume */ }
   },
@@ -348,6 +349,7 @@ var QUIZ = {
     var s = this.load();
     this.answers = (s && s.answers) ? s.answers : Q.questions.map(function () { return null; });
     this.done = false;
+    this.breakSeen = (s && s.breakSeen) || i >= breakAfter();
     this.go(i);
   },
 
@@ -355,7 +357,7 @@ var QUIZ = {
     var s = this.load();
     var box = el('resumebox'), cta = el('introcta');
     if (s && (s.done || s.answers.some(function (a) { return a !== null; }))) {
-      this.i = s.i || 0; this.done = !!s.done; this.answers = s.answers;
+      this.i = s.i || 0; this.done = !!s.done; this.answers = s.answers; this.breakSeen = !!s.breakSeen;
       var n = this.answered();
       el('resumemsg').innerHTML = this.done
         ? 'You finished this before. Want to see that result again?'
@@ -365,7 +367,7 @@ var QUIZ = {
       cta.hidden = true;
     } else {
       this.answers = Q.questions.map(function () { return null; });
-      this.i = 0; this.done = false;
+      this.i = 0; this.done = false; this.breakSeen = false;
       box.hidden = true;
       cta.hidden = false;
     }
@@ -374,7 +376,7 @@ var QUIZ = {
 
   start: function () {
     this.answers = Q.questions.map(function () { return null; });
-    this.i = 0; this.done = false;
+    this.i = 0; this.done = false; this.breakSeen = false;
     this.go(0);
   },
   startOver: function () {
@@ -401,7 +403,33 @@ var QUIZ = {
     if (this.answers[this.i] === null || this.answers[this.i] === undefined) return;
     if (this.i === Q.questions.length - 1) { this.finish(); return; }
     this.i++;
+    // the single pause, once per run, only on the way forward
+    if (!this.breakSeen && breakAfter() !== null && this.i === breakAfter()) {
+      this.breakSeen = true;
+      this.save();
+      this.showBreak();
+      return;
+    }
     this.save();
+    this.render();
+    scrollToScreen('screen-quiz');
+  },
+
+  showBreak: function () {
+    show('screen-break');
+    paintProgress(this.i, true);
+    scrollToScreen('screen-break');
+    el('breakh').focus({ preventScroll: true });
+  },
+  breakNext: function () {
+    show('screen-quiz');
+    this.render();
+    scrollToScreen('screen-quiz');
+  },
+  breakBack: function () {
+    this.i = Math.max(0, this.i - 1);
+    this.save();
+    show('screen-quiz');
     this.render();
     scrollToScreen('screen-quiz');
   },
@@ -411,12 +439,7 @@ var QUIZ = {
     var picked = this.answers[this.i];
     var total = Q.questions.length;
 
-    el('progfill').style.width = Math.round(this.i / total * 100) + '%';
-    var track = el('progtrack');
-    track.setAttribute('aria-valuemax', total);
-    track.setAttribute('aria-valuenow', this.i);
-    track.setAttribute('aria-valuetext', 'Question ' + (this.i + 1) + ' of ' + total);
-    el('progtxt').textContent = 'Question ' + (this.i + 1) + ' of ' + total;
+    paintProgress(this.i, false);
 
     var skipped = this.answers.slice(0, this.i).some(function (a) { return a === null || a === undefined; });
     var jn = el('jumpnote');
@@ -638,13 +661,64 @@ function renderReceipts(role) {
   return h;
 }
 
+
+/* ============================================================
+   THE PROGRESS BAR
+   Pinned to the bottom of the viewport while answering. One
+   segment per question so position is readable at a glance
+   rather than inferred from a percentage, with a notch marking
+   where the halfway break falls.
+   ============================================================ */
+
+function breakAfter() {
+  var v = Q.config.breakAfter;
+  return (v === null || v === undefined) ? null : v;
+}
+
+function buildProgress() {
+  var total = Q.questions.length;
+  var br = breakAfter();
+  var h = '';
+  for (var n = 0; n < total; n++) {
+    h += '<li class="pseg' + (br !== null && n === br ? ' notch' : '') + '"></li>';
+  }
+  el('progsegs').innerHTML = h;
+  el('progtrack').setAttribute('aria-valuemax', total);
+}
+
+/* i = zero-based index of the question showing; atBreak = the pause screen */
+function paintProgress(i, atBreak) {
+  var total = Q.questions.length;
+  var p = R.pageFurniture.progress;
+  var segs = el('progsegs').children;
+  for (var n = 0; n < segs.length; n++) {
+    segs[n].className = 'pseg' +
+      (breakAfter() !== null && n === breakAfter() ? ' notch' : '') +
+      (n < i ? ' done' : '') +
+      (!atBreak && n === i ? ' here' : '');
+  }
+  var label = atBreak
+    ? p.breakLabel + ' · ' + p.template.replace('{n}', i).replace('{total}', total).toLowerCase()
+    : p.template.replace('{n}', i + 1).replace('{total}', total);
+  el('progtxt').textContent = label;
+
+  var track = el('progtrack');
+  track.setAttribute('aria-label', p.ariaLabel);
+  track.setAttribute('aria-valuenow', atBreak ? i : i + 1);
+  track.setAttribute('aria-valuetext', label);
+}
+
 /* ============================================================
    SCREENS
    ============================================================ */
 function show(id) {
-  ['screen-intro', 'screen-quiz', 'screen-result'].forEach(function (s) {
+  ['screen-intro', 'screen-quiz', 'screen-break', 'screen-result'].forEach(function (s) {
     el(s).hidden = (s !== id);
   });
+  // the bar belongs to answering, not to the intro or the result
+  var answering = (id === 'screen-quiz' || id === 'screen-break');
+  el('progbar').hidden = !answering;
+  document.body.classList.toggle('hasprogbar', answering);
 }
 
 /* ============================================================
@@ -733,6 +807,8 @@ document.addEventListener('click', function (e) {
   else if (act === 'fromtop') QUIZ.go(0);
   else if (act === 'back') QUIZ.back();
   else if (act === 'next') QUIZ.next();
+  else if (act === 'breaknext') QUIZ.breakNext();
+  else if (act === 'breakback') QUIZ.breakBack();
   else if (act === 'copylink') SHARE.copyLink();
   else if (act === 'copycode') SHARE.copyCode();
   else if (act === 'nativeshare') SHARE.nativeShare();
@@ -769,6 +845,7 @@ Promise.all([
 
   document.title = Q.meta.title;
   paintFurniture();
+  buildProgress();
   SPARKLE.init();
 
   el('loading').hidden = true;
@@ -811,6 +888,13 @@ function paintFurniture() {
   el('receiptssummary').textContent = f.receiptsSummary;
   el('defsummary').textContent = f.definitionPanel.summary;
   el('caregap').textContent = f.careNote;
+
+  var bk = f.breakScreen;
+  el('breakmark').textContent = bk.mark;
+  el('breakh').textContent = bk.heading;
+  el('breakbody').textContent = bk.body;
+  el('breaknext').textContent = bk.button;
+  el('breakback').textContent = bk.backButton;
 
   var g = f.gridLabels;
   el('gridtitle').textContent = g.title;

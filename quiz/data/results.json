@@ -110,6 +110,21 @@
       "summary": "📐 what counts as companion AI",
       "lead": "Companion AI is defined here by four functions. This is how many of them your own habits switch on — a tool can have all four built in, and you can still only use one of them.",
       "metTemplate": "Your use engages {n} of the 4."
+    },
+    "breakScreen": {
+      "_status": "[DRAFT COPY]",
+      "_note": "The single pause screen, shown once at the halfway point. Deliberately flat: no praise, no encouragement, no 'you're doing great'. It says where you are and what the rest is for, and gets out of the way.",
+      "mark": "halfway",
+      "heading": "Nine down, nine to go.",
+      "body": "The first half asked what the tool does. The second half asks what you bring it and who hears things first — those are the answers that decide which role comes out at the end.",
+      "button": "Keep going",
+      "backButton": "← Back"
+    },
+    "progress": {
+      "_status": "[DRAFT COPY] — label template only",
+      "template": "Question {n} of {total}",
+      "breakLabel": "break",
+      "ariaLabel": "Quiz progress"
     }
   },
   "xBands": [

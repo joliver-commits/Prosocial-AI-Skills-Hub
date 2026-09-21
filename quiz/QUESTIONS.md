@@ -73,6 +73,10 @@ Values sit in `data/results.json` under each role's `companionness`. The four an
 ⚑ = scored, but not one of the four defining functions.
 ⚠ = the finding is on record but its venue, method and sample size are not. Those receipts say so on the card rather than being dressed up.
 
+### The break
+
+One pause screen, after question 9 of 18 (`config.breakAfter`). It is deliberately flat — it states where you are and what the second half is for, with no praise and no encouragement, because a quiz about engagement design should not use engagement copy. Set `breakAfter` to `null` to remove it.
+
 ### Two deliberate irregularities
 
 **Q18 is unscored.** Whether young people notice that nothing flows back has never been measured. Moving a score on that answer would imply a finding that does not exist, so it awards a badge instead.

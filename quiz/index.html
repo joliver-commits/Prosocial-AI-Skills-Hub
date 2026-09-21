@@ -64,13 +64,6 @@
 
       <p id="jumpnote" class="jumpnote" hidden></p>
 
-      <div class="progwrap">
-        <div class="progtrack" id="progtrack" role="progressbar" aria-label="Quiz progress" aria-valuemin="0" aria-valuemax="18" aria-valuenow="0">
-          <div class="progfill" id="progfill"></div>
-        </div>
-        <p class="progtxt" id="progtxt"></p>
-      </div>
-
       <div id="qbody"></div>
 
       <div class="navrow">
@@ -81,6 +74,17 @@
       <p class="resetrow">
         <button type="button" class="linkish" data-act="confirmreset">start over</button>
       </p>
+    </section>
+
+    <!-- ============ THE ONE BREAK ============ -->
+    <section id="screen-break" class="screen breakscreen" aria-labelledby="breakh" hidden>
+      <p class="breakmark" id="breakmark"></p>
+      <h2 class="breakh" id="breakh" tabindex="-1"></h2>
+      <p class="breakbody" id="breakbody"></p>
+      <div class="navrow">
+        <button type="button" class="btn ghost" id="breakback" data-act="breakback"></button>
+        <button type="button" class="btn" id="breaknext" data-act="breaknext"></button>
+      </div>
     </section>
 
     <!-- ============ RESULT ============ -->
@@ -205,6 +209,19 @@
       <button type="button" class="linkish" id="sparklebtn" data-act="sparkles" aria-pressed="false">✨ Sparkles off</button>
     </p>
   </footer>
+</div>
+
+<!-- ============ FIXED PROGRESS BAR ============
+     Lives outside .page so it can pin to the bottom of the viewport. Shown
+     only while answering; the progressbar role carries the semantics, the
+     segments are decoration. -->
+<div class="progbar" id="progbar" hidden>
+  <div class="progbarinner">
+    <p class="progtxt" id="progtxt"></p>
+    <div class="progtrack" id="progtrack" role="progressbar" aria-label="Quiz progress" aria-valuemin="0" aria-valuemax="18" aria-valuenow="0">
+      <ol class="progsegs" id="progsegs" aria-hidden="true"></ol>
+    </div>
+  </div>
 </div>
 
 <!-- ============ DEBUG ============ -->

@@ -8,6 +8,8 @@
   },
   "config": {
     "_note": "X and Y are normalised to 0-100. X divides by the summed maximum of every `x` weight in the bank, so editing weights cannot break the scale. Y divides by `depthMax` instead of the theoretical maximum, because the role probes are near-exclusive in practice — a real person fires one or two, never all six. Raising depthMax makes deep cells harder to reach.",
+    "breakAfter": 9,
+    "breakAfterNote": "Show the one pause screen after this many questions. Set to null for no break at all. It fires once per run when moving forward; going back and forward again does not re-trigger it, and a deep link straight to a later question skips it.",
     "depthMax": 12,
     "yBands": [
       {

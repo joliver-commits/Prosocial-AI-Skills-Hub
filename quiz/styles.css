@@ -281,30 +281,65 @@ input:focus-visible + label,
 .resume p { margin: 0 0 0.75rem; }
 
 /* ============================================================
-   QUESTIONS
+   THE PINNED PROGRESS BAR
    ============================================================ */
-.progwrap { margin: 0 0 1.5rem; }
-.progtrack {
-  height: 1.1rem;
-  border: 3px solid var(--ink);
+.progbar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 40;
   background: var(--paper-2);
-  overflow: hidden;
+  border-top: 5px solid var(--ink);
+  box-shadow: 0 -4px 14px rgba(23, 21, 15, 0.14);
+  padding: 0.5rem 1rem calc(0.5rem + env(safe-area-inset-bottom, 0px));
 }
-.progfill {
-  height: 100%;
-  width: 0;
-  background: repeating-linear-gradient(45deg, var(--lime) 0 8px, var(--cyan) 8px 16px);
-  transition: width 0.3s ease;
-}
+.progbar[hidden] { display: none; }
+.progbarinner { max-width: 62rem; margin: 0 auto; }
+
 .progtxt {
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: bold;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--ink-soft);
-  margin: 0.4rem 0 0;
+  color: var(--ink);
+  margin: 0 0 0.3rem;
 }
 
+.progtrack { width: 100%; }
+
+.progsegs {
+  list-style: none;
+  display: flex;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+}
+.pseg {
+  flex: 1 1 0;
+  height: 0.85rem;
+  background: #fff;
+  border: 2px solid var(--ink);
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+.pseg.done { background: var(--lime); }
+/* where you are: taller, pink, and the only segment with a shadow */
+.pseg.here {
+  background: var(--pink);
+  transform: scaleY(1.7);
+  box-shadow: 2px 2px 0 var(--ink);
+  position: relative;
+  z-index: 2;
+}
+/* where the one break falls */
+.pseg.notch { border-left-width: 5px; }
+
+/* keep the bar from covering the page's own content */
+body.hasprogbar .page { padding-bottom: 6rem; }
+
+/* ============================================================
+   QUESTIONS
+   ============================================================ */
 .jumpnote {
   background: var(--butter);
   border: 3px solid var(--ink);
@@ -376,6 +411,36 @@ input:focus-visible + label,
 }
 .navrow .btn { flex: 1 1 auto; }
 .resetrow { text-align: center; font-size: 0.8rem; margin: 1.25rem 0 0; }
+
+
+/* ============================================================
+   THE ONE BREAK
+   ============================================================ */
+.breakscreen {
+  border: 5px solid var(--ink);
+  background: var(--butter);
+  padding: 1.5rem 1.15rem;
+  margin: 1rem 0;
+  box-shadow: 8px 8px 0 var(--lime);
+}
+.breakmark {
+  font-family: var(--script);
+  font-style: italic;
+  font-size: 2.1rem;
+  line-height: 1;
+  color: var(--pink-ink);
+  margin: 0 0 0.2rem;
+}
+.breakh {
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: 2.1rem;
+  line-height: 1.02;
+  text-transform: uppercase;
+  margin: 0 0 0.6rem;
+}
+.breakh:focus { outline: none; }
+.breakbody { margin: 0 0 0.5rem; font-size: 1.02rem; max-width: 34rem; }
 
 /* ============================================================
    RESULT
@@ -905,6 +970,8 @@ body.sparkle .sptitle::after {
   .btn.big { width: auto; }
   .navrow .btn { flex: 0 0 auto; min-width: 9rem; }
   .deck { font-size: 1.15rem; }
+  .breakh { font-size: 3rem; }
+  body.hasprogbar .page { padding-bottom: 7rem; }
 }
 
 @media (min-width: 62rem) {
