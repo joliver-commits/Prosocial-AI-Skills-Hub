@@ -551,26 +551,27 @@ body.hasprogbar .page { padding-bottom: 6rem; }
   background: var(--ink);
   transform: translateX(-2px);
 }
-.cmpanchors {
-  list-style: none;
-  position: relative;
-  height: 2.6rem;
-  margin: 0.15rem 0 0;
-  padding: 0;
-  font-size: 0.55rem;
-  line-height: 1.15;
-}
-.cmpanchors li {
+/* the single halfway mark — no quarter markers on this bar */
+.cmpmid {
   position: absolute;
-  top: 0;
-  width: 4rem;
-  transform: translateX(-50%);
-  text-align: center;
-  color: var(--ink-soft);
+  top: -3px;
+  bottom: -3px;
+  width: 3px;
+  background: var(--ink);
+  opacity: 0.4;
+  transform: translateX(-1px);
 }
-.cmpanchors li:first-child { transform: translateX(-0.4rem); text-align: left; }
-.cmpanchors li:last-child { transform: translateX(-3.6rem); text-align: right; }
-.cmpanchors .cv { display: block; font-weight: bold; color: var(--ink); }
+.cmpends {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: var(--ink-soft);
+  margin: 0.25rem 0 0;
+}
 .cmpcaption { font-size: 0.8rem; margin: 0.2rem 0 1rem; }
 
 /* ---------- the four-function definition ---------- */

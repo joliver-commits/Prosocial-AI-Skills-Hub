@@ -531,12 +531,14 @@ var QUIZ = {
     el('cmpcaption').textContent = cs.caption;
     el('cmpfill').style.width = role.companionness + '%';
     el('cmppin').style.left = role.companionness + '%';
+    el('cmplow').textContent = cs.lowLabel;
+    el('cmphigh').textContent = cs.highLabel;
+    el('cmpmid').style.left = cs.midpoint.v + '%';
+    el('cmpmid').title = cs.midpoint.t;
     var meter = el('cmpmeter');
     meter.setAttribute('aria-valuenow', role.companionness);
-    meter.setAttribute('aria-valuetext', role.companionness + '% — ' + nearestAnchor(cs.anchors, role.companionness));
-    el('cmpanchors').innerHTML = cs.anchors.map(function (a) {
-      return '<li style="left:' + a.v + '%"><span class="cv">' + a.v + '</span>' + esc(a.t) + '</li>';
-    }).join('');
+    meter.setAttribute('aria-valuetext',
+      role.companionness + ' out of 100, between "' + cs.lowLabel + '" and "' + cs.highLabel + '"');
 
     renderDefinition(scores);
 
@@ -583,14 +585,6 @@ var QUIZ = {
   }
 };
 
-
-function nearestAnchor(anchors, v) {
-  var best = anchors[0];
-  anchors.forEach(function (a) {
-    if (Math.abs(a.v - v) < Math.abs(best.v - v)) best = a;
-  });
-  return best.t;
-}
 
 /* The four-function definition, and which of the four this person's habits
    actually switch on. A tool can ship all four and still only have one of

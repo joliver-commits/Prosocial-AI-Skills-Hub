@@ -27,13 +27,11 @@ The definition text is stored verbatim in `data/results.json` under `definition`
 
 ## Companionness
 
-Each result reports a position on a 0–100 companionness scale — how companion-like that pattern of use is — anchored at four fixed points:
+Each result reports a position on a 0–100 companionness scale — how companion-like that pattern of use is. The bar shows its two ends and a single mark at the halfway point; there are no quarter markers on it.
 
-| Doesn't use AI | Assistant | Confidant | Partner or best friend |
-|---|---|---|---|
-| 0 | 25 | 75 | 100 |
+Companionness is a property of the resolved **role**, not a measurement of the person, and it is not a score out of anything. Values live under each role's `companionness` key.
 
-Companionness is a property of the resolved **role**, not a measurement of the person, and it is not a score out of anything. Values live under each role's `companionness` key. The four anchors are fixed; the intermediate values (acquaintance 15, casual friend 45, therapist-like 70, familial 85) are a first pass and are the most arguable numbers in the project.
+Behind the numbers, the roles are calibrated against four reference points — doesn't use AI 0, assistant 25, confidant 75, partner or best friend 100. That calibration sets each role's value and is recorded in `QUESTIONS.md`; it is not drawn on the bar. The intermediate values (acquaintance 15, casual friend 45, therapist-like 70, familial 85) are a first pass and are the most arguable numbers in the project.
 
 ## Contents
 

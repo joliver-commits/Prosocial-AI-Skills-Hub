@@ -38,14 +38,18 @@ This is deliberately separate from companionness. A tool can ship all four funct
 
 Each role carries a fixed position on a 0–100 scale of how companion-like the pattern of use is. It is a property of the **role**, not a measurement of the person, and it is not a score out of anything.
 
-| Anchor | Value |
+The scale is calibrated against four reference points:
+
+| Reference point | Value |
 |---|---|
 | Doesn't use AI | 0 |
 | Assistant | 25 |
 | Confidant | 75 |
 | Partner or best friend | 100 |
 
-Values sit in `data/results.json` under each role's `companionness`. The four anchors above are fixed reference points; the intermediate values are a first pass and are the most arguable numbers in the project — worth a look before this goes anywhere.
+These set each role's number and live here as documentation only — **the bar itself shows just its two ends and one mark at the halfway point**, with no quarter markers drawn on it.
+
+Values sit in `data/results.json` under each role's `companionness`. The intermediate values are a first pass and are the most arguable numbers in the project — worth a look before this goes anywhere.
 
 ## The audit table
 

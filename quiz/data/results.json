@@ -82,28 +82,16 @@
       "yAxis": "Role depth — how close a friendship role your use occupies"
     },
     "companionnessScale": {
-      "_status": "[DRAFT COPY] — caption and anchor labels",
-      "_note": "Companionness is a property of the resolved role, not a separate measurement. Each role carries its own value under roles.<key>.companionness. Anchors below are the fixed reference points printed under the meter.",
+      "_status": "[DRAFT COPY] — caption and the two end labels",
+      "_note": "Companionness is a property of the resolved role; each role carries its own value under roles.<key>.companionness. The bar shows the two ends and a single mark at the halfway point — no quarter markers. The role calibration (assistant 25, confidant 75) still sets the role values and is recorded in QUESTIONS.md, but it is not drawn on the bar.",
       "label": "companionness",
       "caption": "How companion-like this pattern of use is. It's a position on a scale, not a score out of anything — nothing here is being marked.",
-      "anchors": [
-        {
-          "v": 0,
-          "t": "doesn't use AI"
-        },
-        {
-          "v": 25,
-          "t": "assistant"
-        },
-        {
-          "v": 75,
-          "t": "confidant"
-        },
-        {
-          "v": 100,
-          "t": "partner or best friend"
-        }
-      ]
+      "lowLabel": "doesn't use AI",
+      "highLabel": "partner or best friend",
+      "midpoint": {
+        "v": 50,
+        "t": "halfway"
+      }
     },
     "definitionPanel": {
       "_status": "[DRAFT COPY] — heading and lead only; the four function texts under `definition` are not draft",
